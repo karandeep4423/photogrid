@@ -1,0 +1,42 @@
+export default async function sitemap() {
+    const baseUrl = "http://localhost:3000";
+  
+    const res = await fetch(`${baseUrl}/api/images`, {
+      method: "GET",
+    });
+  
+    const result = await res.json();
+  
+    const uniqueEntries: any[] = [];
+  
+    result.forEach((img: any) => {
+      const imageEntry = {
+        url: `${baseUrl}/${img.imageName}`,
+        lastModified: new Date(),
+      };
+  
+      const categoryEntry = {
+        url: `${baseUrl}/${img.imageCategory}`,
+        lastModified: new Date(),
+      };
+  
+      if (!uniqueEntries.some((entry) => entry.url === imageEntry.url)) {
+        uniqueEntries.push(imageEntry);
+      }
+  
+      if (!uniqueEntries.some((entry) => entry.url === categoryEntry.url)) {
+        uniqueEntries.push(categoryEntry);
+      }
+    });
+  
+    const sitemapEntries = [
+      ...uniqueEntries,
+      {
+        url: baseUrl,
+        lastModified: new Date(),
+      },
+    ];
+  
+    return sitemapEntries;
+  }
+  
