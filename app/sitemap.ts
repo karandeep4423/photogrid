@@ -1,7 +1,7 @@
 export default async function sitemap() {
     const baseUrl = "http://localhost:3000";
   
-    const res = await fetch(`${baseUrl}/api/images`, {
+    const res = await fetch("/api/images", {
       method: "GET",
     });
   
