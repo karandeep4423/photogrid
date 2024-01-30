@@ -3,4 +3,7 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+},
 }

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import jwt, { JwtPayload, Secret } from "jsonwebtoken";
 import { useRouter, usePathname } from "next/navigation";
 import ImageDetailEdit from "@/components/admin-image-detail/page";
+import Image from "next/image";
 export default function Home() {
   const [files, setFiles] = useState<File[]>([]);
   const [imageNames, setImageNames] = useState<string[]>([]);
@@ -127,7 +128,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   const imageDetailBtn = async (e: any) => {
     e.preventDefault();
@@ -275,7 +276,7 @@ export default function Home() {
                   className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between  border-2  p-3  rounded-lg  mt-3"
                 >
                   <div>
-                    <img
+                    <Image
                       src={URL.createObjectURL(file)}
                       alt={`Preview ${file.name}`}
                       className="w-16 rounded-lg h-16 object-cover "
@@ -400,12 +401,13 @@ export default function Home() {
               className=" border-2 rounded-xl h-fit  border-gray-400"
             >
               <div>
-                <img
+                <Image
                   src={`https://dnid0r1bm9raq.cloudfront.net/${
                     img?.image?.split(".com")[1]?.substring(1) || null
                   }`}
+                  alt=""
                   className=" rounded-lg w-full h-44 "
-                ></img>
+                ></Image>
               </div>
               <div className="flex flex-col p-4 my-2">
                 <p className="text-xl font-bold text-sky-600">Image Name:</p>

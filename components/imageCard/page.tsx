@@ -4,6 +4,7 @@ import Pagination from "@/components/Pagination/page";
 import Link from "next/link";
 import DownloadShareModal from "@/components/downloadShareModal/page";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface ImageProps {
   params: string;
@@ -98,10 +99,11 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               shadow-[5px_5px_0px_4px_rgba(2,139,199,0.5),_-5px_-5px_0px_rgba(255,255,255,1)]"
             >
               <div>
-                <img
+                <Image
                   src={`https://dnid0r1bm9raq.cloudfront.net/${
                     img?.image?.split(".com")[1]?.substring(1) || null
                   }`}
+                  alt=""
                   className="rounded-2xl object-fill    w-full h-80"
                 />
               </div>

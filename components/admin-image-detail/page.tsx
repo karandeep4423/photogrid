@@ -62,8 +62,8 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
   }
   useEffect(() => {
     Modal.setAppElement("#root");
-  }, []);
-  console.log("url", url);
+  });
+
   const fetchImageDetail = async () => {
     const res = await fetch(`/api/image-detail?params=${url}`, {
       method: "GET",
@@ -80,10 +80,10 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
       setID(firstImageDetail._id);
     }
   };
-  console.log("imageContent", imageContent);
+
   useEffect(() => {
     fetchImageDetail();
-  }, [url]);
+  }, [url,imageName,imageLanguage]);
 
   useEffect(() => {
     Modal.setAppElement("#root");

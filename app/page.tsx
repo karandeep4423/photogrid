@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import Link from "next/link";
 import "aos/dist/aos.css";
+import Image from "next/image";
 export default function Home() {
   const [image, setImage] = useState<resultProps[]>([]);
 
@@ -43,7 +44,7 @@ export default function Home() {
       once: true,
     });
     fetchImage();
-  }, []);
+  },[]);
   return (
     <div>
       <div className="relative max-w-screen-xl m-auto   w-full h-screen  flex flex-col md:flex-row px-10 items-center  ">
@@ -92,7 +93,7 @@ export default function Home() {
                  shadow-[5px_5px_0px_4px_rgba(2,139,199,0.5),_-5px_-5px_0px_rgba(255,255,255,1)]"
               >
                 <Link href={img.imageName}>
-                  <img
+                  <Image
                     className="m-auto rounded-xl "
                     src={`https://dnid0r1bm9raq.cloudfront.net/${
                     img?.image?.split(".com")[1]?.substring(1) || null
@@ -100,7 +101,7 @@ export default function Home() {
                     height={600}
                     width={600}
                     alt=""
-                  ></img>
+                  ></Image>
                 </Link>
                 <h3 className="text-center mb-2 text-3xl font-medium">
                   <Link href={img.imageName}>{img.imageName}</Link>{" "}

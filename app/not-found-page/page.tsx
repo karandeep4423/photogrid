@@ -6,7 +6,7 @@ export default function NotFound() {
       <div className=" flex flex-col items-center justify-center h-screen">
         <h1 className="mb-4 text-6xl font-semibold text-sky-600">404</h1>
         <p className="mb-4 text-lg text-gray-600">
-          Oops! Looks like you're lost.
+          Oops! Looks like you are lost.
         </p>
         <div className="animate-bounce">
           <svg
