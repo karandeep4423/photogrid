@@ -1,48 +1,92 @@
-export default async function sitemap() {
-  const baseUrl = "https://photo-grid.org";
 
-  const isPrerendering = typeof window === "undefined";
+// export default async function sitemap(){
+//     const baseUrl = "https://photo-grid.org";
+  
+//     const res = await fetch("http://localhost:3000/api/images", {
+//       method: "GET",
+//     });
+  
+//     const result = await res.json();
+  
+//     const uniqueEntries: any[] = [];
+  
+//     result.forEach((img: any) => {
+//       const imageEntry = {
+//         url: `${baseUrl}/${img.imageName}`,
+//         lastModified: new Date(),
+//       };
+  
+//       const categoryEntry = {
+//         url: `${baseUrl}/${img.imageCategory}`,
+//         lastModified: new Date(),
+//       };
+  
+//       if (!uniqueEntries.some((entry) => entry.url === imageEntry.url)) {
+//         uniqueEntries.push(imageEntry);
+//       }
+  
+//       if (!uniqueEntries.some((entry) => entry.url === categoryEntry.url)) {
+//         uniqueEntries.push(categoryEntry);
+//       }
+//     });
+  
+//     const sitemapEntries = [
+//       ...uniqueEntries,
+//       {
+//         url: baseUrl,
+//         lastModified: new Date(),
+//       },
+//     ];
+  
+//     return sitemapEntries;
+//   }
+  
+import { MetadataRoute } from 'next';
 
-  let result = [];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const baseUrl = "https://photo-grid.org";
 
-  if (!isPrerendering) {
-    // Fetch data only during runtime
-    const res = await fetch("/api/images", {
-      method: "GET",
-    });
+      const res = await fetch("http://localhost:3000/api/images", {
+        method: "GET",
+      });
 
-    result = await res.json();
-  }
+      const result = await res.json();
 
-  const uniqueEntries: any[] = [];
+      const uniqueEntries: any[] = [];
 
-  result.forEach((img: any) => {
-    const imageEntry = {
-      url: `${baseUrl}/${img.imageName}`,
-      lastModified: new Date(),
-    };
+      result.forEach((img: any) => {
+        const imageEntry = {
+          url: `${baseUrl}/${img.imageName}`,
+          lastModified: new Date(),
+        };
 
-    const categoryEntry = {
-      url: `${baseUrl}/${img.imageCategory}`,
-      lastModified: new Date(),
-    };
+        const categoryEntry = {
+          url: `${baseUrl}/${img.imageCategory}`,
+          lastModified: new Date(),
+        };
 
-    if (!uniqueEntries.some((entry) => entry.url === imageEntry.url)) {
-      uniqueEntries.push(imageEntry);
-    }
+        if (!uniqueEntries.some((entry) => entry.url === imageEntry.url)) {
+          uniqueEntries.push(imageEntry);
+        }
 
-    if (!uniqueEntries.some((entry) => entry.url === categoryEntry.url)) {
-      uniqueEntries.push(categoryEntry);
+        if (!uniqueEntries.some((entry) => entry.url === categoryEntry.url)) {
+          uniqueEntries.push(categoryEntry);
+        }
+      });
+
+      const sitemapEntries = [
+        ...uniqueEntries,
+        {
+          url: baseUrl,
+          lastModified: new Date(),
+        },
+      ];
+
+      resolve(sitemapEntries);
+    } catch (error) {
+      reject(error);
     }
   });
-
-  const sitemapEntries = [
-    ...uniqueEntries,
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-    },
-  ];
-
-  return sitemapEntries;
 }
