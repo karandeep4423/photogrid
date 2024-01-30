@@ -104,6 +104,8 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                     img?.image?.split(".com")[1]?.substring(1) || null
                   }`}
                   alt=""
+                  width={250}
+                  height={250}
                   className="rounded-2xl object-fill    w-full h-80"
                 />
               </div>
