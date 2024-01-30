@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     try {
       const baseUrl = "https://photo-grid.org";
 
-      const res = await fetch("http://localhost:3000/api/images", {
+      const res = await fetch("/api/images", {
         method: "GET",
       });
 
