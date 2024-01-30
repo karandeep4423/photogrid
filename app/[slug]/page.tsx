@@ -7,7 +7,7 @@ export async function generateMetadata({
 }) {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/image-detail?params=${params?.slug}`,
+      `/api/image-detail?params=${params?.slug}`,
       {
         method: "GET",
       }
@@ -65,7 +65,7 @@ export async function generateStaticParams({
   };
 }) {
   const res = await fetch(
-    `http://localhost:3000/api/images?params=${params?.slug}`,
+    `/api/images?params=${params?.slug}`,
     {
       method: "GET",
     }
