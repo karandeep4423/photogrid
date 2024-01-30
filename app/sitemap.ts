@@ -1,5 +1,5 @@
 export default async function sitemap() {
-    const baseUrl = "http://localhost:3000";
+    const baseUrl = "https://photo-grid.org";
   
     const res = await fetch("/api/images", {
       method: "GET",
