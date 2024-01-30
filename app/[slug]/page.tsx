@@ -64,39 +64,46 @@ export async function generateStaticParams({
     slug?: string;
   };
 }) {
-  const res = await fetch(
-    `/api/images?params=${params?.slug}`,
-    {
-      method: "GET",
-    }
-  );
-  
-  const result = await res.json();
-  
-  if (!Array.isArray(result)) {
+  // Check if params or params.slug is undefined
+  if (!params || !params?.slug) {
     return [];
   }
 
-  const uniqueValues = new Set();
+  try {
+    const res = await fetch(`/api/images?params=${params.slug}`, {
+      method: 'GET',
+    });
 
-  return result
-    .filter((img) => {
-      // Check if both imageName and imageCategory are unique
-      const isUnique =
-        !uniqueValues.has(img?.imageName) && !uniqueValues.has(img?.imageCategory);
+    const result = await res.json();
 
-      if (isUnique) {
-        // Add the values to the set if they are unique
-        uniqueValues.add(img?.imageName);
-        uniqueValues.add(img?.imageCategory);
-      }
+    if (!Array.isArray(result)) {
+      return [];
+    }
 
-      return isUnique;
-    })
-    .map((img) => ({
-      imageName: img?.imageName,
-      imageCategory: img?.imageCategory,
-    }));
+    const uniqueValues = new Set();
+
+    return result
+      .filter((img) => {
+        // Check if both imageName and imageCategory are unique
+        const isUnique =
+          !uniqueValues.has(img?.imageName) && !uniqueValues.has(img?.imageCategory);
+
+        if (isUnique) {
+          // Add the values to the set if they are unique
+          uniqueValues.add(img?.imageName);
+          uniqueValues.add(img?.imageCategory);
+        }
+
+        return isUnique;
+      })
+      .map((img) => ({
+        imageName: img?.imageName,
+        imageCategory: img?.imageCategory,
+      }));
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
 }
 
 
