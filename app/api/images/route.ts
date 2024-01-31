@@ -84,7 +84,6 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 export const GET = async (req: NextRequest) => {
   const urlSearchParams = req.nextUrl.searchParams;
   const key = urlSearchParams.get("params");
-  console.log("key", key);
 
   await connectToDb();
   try {

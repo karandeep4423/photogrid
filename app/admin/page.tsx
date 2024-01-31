@@ -26,7 +26,7 @@ export default function Home() {
   const router = useRouter();
   const pathname = usePathname();
   const pageSize = 12;
-  console.log("dattaaa", data);
+
   type resultProps = {
     image: string;
     imageName: string;
@@ -164,9 +164,11 @@ export default function Home() {
     const from = to - pageSize;
     setCollection(data.slice(from, to));
   };
+
   const imageDetailToggle = () => {
     setWriteImageDetail(!writeImageDetail);
   };
+
   const verifyToken = (token: string, secret: Secret): JwtPayload | null => {
     try {
       const decoded = jwt.verify(token, secret) as JwtPayload;
@@ -279,6 +281,8 @@ export default function Home() {
                     <Image
                       src={URL.createObjectURL(file)}
                       alt={`Preview ${file.name}`}
+                      width={250}
+                      height={250}
                       className="w-16 rounded-lg h-16 object-cover "
                     />
                   </div>
@@ -406,6 +410,8 @@ export default function Home() {
                     img?.image?.split(".com")[1]?.substring(1) || null
                   }`}
                   alt=""
+                  width={250}
+                  height={250}
                   className=" rounded-lg w-full h-44 "
                 ></Image>
               </div>

@@ -7,7 +7,7 @@ export async function generateMetadata({
 }) {
   try {
     const res = await fetch(
-      `/api/image-detail?params=${params?.slug}`,
+      `https://photogrid-9pfl.vercel.app/api/image-detail?params=${params?.slug}`,
       {
         method: "GET",
       }
@@ -25,7 +25,7 @@ export async function generateMetadata({
       title: result[0]?.imageTitle,
       description: result[0]?.imageDescription,
       alternates: {
-        canonical: `http://localhost:3000/${params.slug}`,
+        canonical: `https://photo-grid.org/${params.slug}`,
       },
     };
   } catch (error) {
@@ -36,26 +36,6 @@ export async function generateMetadata({
   }
 }
 
-// export async function generateStaticParams({
-//   params,
-// }: {
-//   params: {
-//     slug: string;
-//   };
-// }) {
-//   const res = await fetch(
-//     `http://localhost:3000/api/images?params=${params?.slug}`,
-//     {
-//       method: "GET",
-//     }
-//   );
-//   const result = await res.json();
-//   if (!result) return [];
-//   return result.map((img: any) => ({
-//     imageName: img?.imageName,
-//     imageCategory: img?.imageCategory,
-//   }));
-// }
 
 export async function generateStaticParams({
   params,
@@ -70,7 +50,7 @@ export async function generateStaticParams({
   }
 
   try {
-    const res = await fetch(`/api/images?params=${params.slug}`, {
+    const res = await fetch(`https://photogrid-9pfl.vercel.app/api/images?params=${params.slug}`, {
       method: 'GET',
     });
 

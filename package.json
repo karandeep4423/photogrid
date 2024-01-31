@@ -15,7 +15,7 @@
     "@types/react-dropzone": "^5.1.0",
     "aos": "^2.3.4",
     "aws-sdk": "^2.1536.0",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "next": "^14.1.0",
