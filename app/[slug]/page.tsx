@@ -6,6 +6,7 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   try {
+    console.log("server func",  params?.slug);
     const res = await fetch(
       `https://photogrid-9pfl.vercel.app/api/image-detail?params=${params?.slug}`,
       {
@@ -14,6 +15,7 @@ export async function generateMetadata({
     );
     const result = await res.json();
     console.log("server func",  result);
+
 
     if (!result)
       return {
@@ -29,6 +31,7 @@ export async function generateMetadata({
       },
     };
   } catch (error) {
+    console.log(error)
     return {
       title: "Not Found",
       description: "The page you are looking for does not exist.",
