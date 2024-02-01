@@ -73,8 +73,8 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
         </button>
       </div>
       <ul
-        className={`lg:space-x-6 gap-y-4 text-lg  absolute  justify-between flex flex-col items-center lg:flex-row  z-50  lg:static  lg:w-auto lg:py-0 pb-6  w-full left-0 ${
-          open ? "hidden lg:flex " : "top-[64px] bg-indigo-100 pt-6"
+        className={`lg:space-x-6 gap-y-4 text-lg  absolute  justify-between flex flex-col items-center lg:flex-row  z-50 lg:z-10  lg:static  lg:w-auto lg:py-0 pb-6  w-full left-0 ${
+          open ? "hidden lg:flex " : "top-[64px]  bg-indigo-100 pt-6"
         }`}
       >
         {navItems.map((item) => (
@@ -145,7 +145,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
               <ul
                 className={`sm:absolute ${
                   visible === item.label ? "block" : "hidden"
-                } shadow-[0_3px_10px_rgb(0,0,0,0.2)]  transition duration-1000 ease-in-out bg-blue-300 rounded-xl mt-1 p-3 w-full sm:w-auto`}
+                } shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-50 transition duration-1000 ease-in-out bg-blue-300 rounded-xl mt-1 p-3 w-full sm:w-auto`}
               >
                 {/* children of links and buttons item.subItems for mapping */}
                 {item.subItems.map((subItem) => (
@@ -210,7 +210,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
                       <ul
                         className={`${
                           visible === item.label ? "block" : "hidden"
-                        } shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition duration-1000 border-2 border-black ease-in-out bg-blue-300 p-1 m-1 rounded-xl w-full sm:w-auto`}
+                        } z-50 shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition duration-1000 border-2 border-black ease-in-out bg-blue-300 p-1 m-1 rounded-xl w-full sm:w-auto`}
                       >
                         {/* grand children of buttons and links for mapping  */}
                         {subItem.subItems.map((grandChildItem) => (

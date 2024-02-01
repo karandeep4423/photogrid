@@ -68,12 +68,12 @@ export default function Home() {
       formData.append("images", file);
       formData.append("imageNames", imageNames[index]);
     });
-    formData.append("imageName", imageName);
-    formData.append("imageCategory", imageCategory);
-    formData.append("imageLanguage", imageLanguage);
-    formData.append("imageTitle", imageTitle);
-    formData.append("imageDescription", imageDescription);
-    formData.append("imageContent", imageContent);
+    formData.append("imageName", imageName.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''));
+    formData.append("imageCategory", imageCategory.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''));
+    formData.append("imageLanguage", imageLanguage.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''));
+    // formData.append("imageTitle", imageTitle);
+    // formData.append("imageDescription", imageDescription);
+    // formData.append("imageContent", imageContent);
     try {
       const res = await fetch("/api/images", {
         method: "POST",
@@ -117,18 +117,17 @@ export default function Home() {
   };
   const fetchData = async () => {
     setLoader(true);
-    const res = await fetch(`/api/images?params=${searchImage}`, {
+    const res = await fetch(`/api/images?params=${searchImage.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, '')}`, {
       method: "GET",
     });
     const result = await res.json();
+    if (result.length == 0) {
+      toast.error("There is no data for this request.");
+    }
     setData(result || []);
     setCollection(result || [].slice(0, pageSize));
     setLoader(false);
   };
-
-  useEffect(() => {
-    fetchData();
-  },[]);
 
   const imageDetailBtn = async (e: any) => {
     e.preventDefault();
@@ -138,8 +137,8 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        imageName,
-        imageLanguage,
+        imageName:imageName.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''),
+        imageLanguage:imageLanguage.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''),
         imageTitle,
         imageDescription,
         imageContent,
@@ -201,30 +200,30 @@ export default function Home() {
             Upload images
           </h1>
           <div className="flex flex-col md:flex-row gap-4 m-6 items-center">
-          <button
-            onClick={() => {
-              localStorage.clear();
-              window.location.reload();
-            }}
-            className="px-4 font-medium text-gray-100 text-base hover:border-white py-2 hover:bg-sky-700 bg-sky-600  rounded-xl"
-          >
-            Logout
-          </button>
-          <div id="root">
-            <ImageDetailEdit url={searchImage}>Check Detail</ImageDetailEdit>
-          </div>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input
-              onClick={imageDetailToggle}
-              type="checkbox"
-              value=""
-              className="sr-only peer"
-            />
-            <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Image detail toggle 
-            </span>
-          </label>
+            <button
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+              className="px-4 font-medium text-gray-100 text-base hover:border-white py-2 hover:bg-sky-700 bg-sky-600  rounded-xl"
+            >
+              Logout
+            </button>
+            <div id="root">
+              <ImageDetailEdit url={searchImage}>Check Detail</ImageDetailEdit>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                onClick={imageDetailToggle}
+                type="checkbox"
+                value=""
+                className="sr-only peer"
+              />
+              <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-sky-600 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-sky-600"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Image detail toggle
+              </span>
+            </label>
           </div>
         </div>
         <div className="flex flex-col gap-5">
@@ -233,7 +232,7 @@ export default function Home() {
             className="text-gray-200 bg-black font-bold text-2xl border-2 rounded-xl p-2 px-3 border-white"
             onChange={(e) => setSearchImage(e.target.value)}
             value={searchImage}
-            type="text"
+            type="search"
             required
           ></input>
           <div className="flex justify-center w-full items-center">
@@ -308,7 +307,7 @@ export default function Home() {
               required
             />
             <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-              Write image name
+              {writeImageDetail == false ?"Write image name": "write category/url/image name for saving details"}
             </label>
           </div>
           {writeImageDetail == true ? (
@@ -432,12 +431,12 @@ export default function Home() {
                 <span className="text-xl text-gray-300 font-bold">
                   {img.imageLanguage}
                 </span>
-                  <button
-                    onClick={() => deleteImage(img._id, img.imageName)}
-                    className="mt-1 hover:bg-sky-700 px-3 p-2 rounded-xl font-medium text-gray-100 bg-sky-600"
-                  >
-                    Delete
-                  </button>
+                <button
+                  onClick={() => deleteImage(img._id, img.imageName)}
+                  className="mt-1 hover:bg-sky-700 px-3 p-2 rounded-xl font-medium text-gray-100 bg-sky-600"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           );

@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
-import Input, { isValidPhoneNumber } from "react-phone-number-input/input";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { toast } from "react-toastify";
 import AOS from "aos";
@@ -9,7 +8,7 @@ import "aos/dist/aos.css";
 const Contact: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [phone, setPhone] = useState<string | undefined>("");
+  const [phone, setPhone] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
@@ -24,33 +23,29 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (phone && isValidPhoneNumber(phone.toString()) === false) {
-      toast.error("Invalid phone number");
-    } else {
-      if (email && name && phone && message) {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            name: name,
-            phone: phone,
-            message: message,
-          }),
-        });
-        const result = await res.json();
-        if (result.err) {
-          toast.error("Server error, Try again");
-          return;
-        }
-        setEmail("");
-        setName("");
-        setPhone("");
-        setMessage("");
-        toast.success("Your message has been sent successfully");
+    if (email && name && phone && message) {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          name: name,
+          phone: phone,
+          message: message,
+        }),
+      });
+      const result = await res.json();
+      if (result.err) {
+        toast.error("Server error, Try again");
+        return;
       }
+      setEmail("");
+      setName("");
+      setPhone("");
+      setMessage("");
+      toast.success("Your message has been sent successfully");
     }
   };
 
@@ -61,7 +56,7 @@ const Contact: React.FC = () => {
           <h2 className="text-gray-700 relative text-center mt-14 text-5xl font-bold">
             Send enquiry
           </h2>
-          <div className="bg-sky-400 mt-14 absolute   mix-blend-multiply filter blur-2xl h-8 w-56 "></div>
+          <div className="bg-sky-400 z-20 mt-12 absolute   mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
         </div>
         <form
           onSubmit={handleSubmit}
@@ -141,9 +136,9 @@ const Contact: React.FC = () => {
               }}
             ></Player>
             <div className="relative z-0 w-full mb-6 group">
-              <Input
+              <input
                 value={phone}
-                onChange={setPhone}
+                onChange={(e) => setPhone(e.target.value)}
                 type="tel"
                 name="telephone"
                 className="block py-2.5 px-0 w-full text-xl text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-800 dark:border-gray-600 dark:focus:border-sky-600 focus:outline-none focus:ring-0 focus:border-sky-600 peer"

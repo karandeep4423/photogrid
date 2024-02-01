@@ -29,13 +29,15 @@ const customStyles = {
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.6)",
+    zIndex: 20,
   },
 };
 
 interface ShareButtonProps {
   url: string;
+  imgName: string;
 }
-export const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
+export const ShareButton: React.FC<ShareButtonProps> = ({ url, imgName }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isCopied, setCopied] = useState(false);
 
@@ -111,26 +113,16 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
         </button>
         <div className=" mt-4  flex flex-col gap-2">
           <div className="flex flex-row gap-3">
-            <WhatsappShareButton
-              url={url}
-              title="Title or jo bhi aapko likhna ho"
-              // hashtag={'#portfolio...'}
-            >
+            <WhatsappShareButton url={url} title={imgName}>
               <WhatsappIcon size={40} round={true} />
             </WhatsappShareButton>
-            <FacebookShareButton
-              title="Title or jo bhi aapko likhna ho"
-              url={url}
-            >
+            <FacebookShareButton title={imgName} url={url}>
               <FacebookIcon size={40} round={true} />
             </FacebookShareButton>{" "}
-            <TwitterShareButton
-              title="Title or jo bhi aapko likhna ho"
-              url={url}
-            >
+            <TwitterShareButton title={imgName} url={url}>
               <TwitterIcon size={40} round={true} />
             </TwitterShareButton>{" "}
-            <EmailShareButton title="Title or jo bhi aapko likhna ho" url={url}>
+            <EmailShareButton title={imgName} url={url}>
               <EmailIcon size={40} round={true} />
             </EmailShareButton>{" "}
           </div>
@@ -156,7 +148,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
               value={url}
               type="text"
             ></input>
-            <CopyToClipboard text="hekko" onCopy={handleCopy}>
+            <CopyToClipboard text={url} onCopy={handleCopy}>
               <button className="bg-sky-600 rounded-lg text-white px-2 sm:px-3 py-2  focus:outline-none">
                 {isCopied ? "Copied!" : "Copy link"}
               </button>

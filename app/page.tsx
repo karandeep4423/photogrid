@@ -47,18 +47,18 @@ export default function Home() {
   },[]);
   return (
     <div>
-      <div className="relative max-w-screen-xl m-auto   w-full h-screen  flex flex-col md:flex-row px-10 items-center  ">
+      <div className="relative max-w-screen-xl m-auto w-full h-fit sm:h-screen flex flex-col justify-center px-10 items-center  ">
         <div className="absolute sm:left-10 mix-blend-multiply w-11/12 h-96  top-28 bg-gradient-to-r from-blue-300 via-purple-300  to-yellow-200 filter blur-3xl transform translate-y-2 scale-y-75 skew-y-12 ">
           {" "}
         </div>
         <div>
-          <h1 className=" text-5xl text-gray-700 text-center font-bold">
+          <h1 className="text-3xl sm:text-5xl text-gray-700 text-center font-bold">
             Learn <span className="text-sky-600">Punjabi language </span>and get
             <span className="text-pink-400"> Gurbani Classes of </span>
             with experienced tutors of{" "}
             <span className="text-cyan-500">Punjabi Lesson.</span>
           </h1>
-          <p data-aos="fade-up" className="text-xl mt-8">
+          <p data-aos="fade-up" className="text-lg sm:text-xl mt-8">
             We are a team of qualified teachers with industry-proven years of
             experience. Book a class according to your availability to open new
             door of language.
@@ -66,7 +66,7 @@ export default function Home() {
         </div>
         {/* <div>
           <img
-            src="/hero.png"
+            src="/italian.png"
             className="w-[2000px] h-[500px]"
             width={1000}
             height={1000}
@@ -74,7 +74,7 @@ export default function Home() {
           ></img>
         </div> */}
       </div>
-      <div className="relative max-w-screen-xl m-auto">
+      <div className="  max-w-screen-xl m-auto">
         <div className="flex  items-center justify-center">
           <div data-aos="fade-up">
             <h2 className="text-gray-700 relative mt-12 text-center mx-3 text-5xl font-bold">
@@ -83,7 +83,7 @@ export default function Home() {
           </div>
           <div className="bg-sky-400 mt-12 absolute   mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
         </div>
-        <div className="text-lg xl:text-xl grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-10 p-6 md:p-10">
+        <div className="text-lg mb-5 xl:text-xl grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-10 p-6 md:p-10">
           {image.map((img: resultProps, index:number) => {
             return (
               <div

@@ -45,6 +45,7 @@ interface ModalProps {
               url={`https://dnid0r1bm9raq.cloudfront.net/${
                 image?.split(".com")[1]?.substring(1) || null
               }`}
+              imgName={imageName}
             />
           </div>
         </div>
