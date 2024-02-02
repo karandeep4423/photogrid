@@ -40,9 +40,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         method: "GET",
       });
       const result = await res.json();
-      if (result.length == 0) {
-        router.push("/not-found-page");
-      }
+      // if (result.length == 0) {
+      //   router.push("/not-found-page");
+      // }
       const fetchedData = result || [];
       console.log("fetch res", result);
       setData(fetchedData);
@@ -136,9 +136,10 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                 >
                   <div>
                     <Image
-                      src={`https://dnid0r1bm9raq.cloudfront.net/${
-                        img?.image?.split(".com")[1]?.substring(1) || null
-                      }`}
+                      // src={`https://dnid0r1bm9raq.cloudfront.net/${
+                      //   img?.image?.split(".com")[1]?.substring(1) || null
+                      // }`}
+                      src={img?.image}
                       alt=""
                       width={250}
                       height={250}

@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         }
         const buffer = Buffer.from(await image.arrayBuffer());
         const bufferResize = await sharp(buffer)
-          .resize({ height: 1920, width: 1080, fit: "fill" })
+          .resize({ height: 1400, width: 1134, fit: "fill" })
           .jpeg({ quality: 80, mozjpeg: true })
           .toBuffer();
         const s3Url = await uploadFileToS3(bufferResize, imageName.toString());

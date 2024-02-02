@@ -44,7 +44,7 @@ export default function Home() {
       once: true,
     });
     fetchImage();
-  },[]);
+  }, []);
   return (
     <div>
       <div className="relative max-w-screen-xl m-auto w-full h-fit sm:h-screen flex flex-col justify-center px-10 items-center  ">
@@ -84,27 +84,35 @@ export default function Home() {
           <div className="bg-sky-400 mt-12 absolute   mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
         </div>
         <div className="text-lg mb-5 xl:text-xl grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-10 p-6 md:p-10">
-          {image.map((img: resultProps, index:number) => {
+          {image.map((img: resultProps, index: number) => {
             return (
               <div
                 key={index}
                 data-aos="fade-up"
-                className="w-fit max-h-fit p-5 border-2 rounded-2xl bg-indigo-100 
+                className="relative  w-full max-h-fit p-5 border-2 rounded-2xl bg-indigo-100 
                  shadow-[5px_5px_0px_4px_rgba(2,139,199,0.5),_-5px_-5px_0px_rgba(255,255,255,1)]"
               >
                 <Link href={img.imageName}>
                   <Image
-                    className="m-auto rounded-xl "
-                    src={`https://dnid0r1bm9raq.cloudfront.net/${
-                    img?.image?.split(".com")[1]?.substring(1) || null
-                  }`}
+                    className="m-auto rounded-xl object-fill aspect-square w-full h-auto "
+                    // src={`https://dnid0r1bm9raq.cloudfront.net/${
+                    //   img?.image?.split(".com")[1]?.substring(1) || null
+                    // }`}
+                    src={img?.image}
                     height={600}
                     width={600}
                     alt=""
                   ></Image>
                 </Link>
-                <h3 className="text-center mb-2 text-3xl font-medium">
-                  <Link href={img.imageName}>{img.imageName}</Link>{" "}
+                <h3 className="text-center my-2 text-3xl font-medium">
+                  <Link href={img.imageName}>
+                    {img.imageName
+                      .split("-")
+                      .map(function (word) {
+                        return word.charAt(0).toUpperCase() + word.slice(1);
+                      })
+                      .join(" ")}
+                  </Link>{" "}
                 </h3>
               </div>
             );

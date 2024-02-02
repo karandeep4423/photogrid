@@ -405,9 +405,10 @@ export default function Home() {
             >
               <div>
                 <Image
-                  src={`https://dnid0r1bm9raq.cloudfront.net/${
-                    img?.image?.split(".com")[1]?.substring(1) || null
-                  }`}
+                  // src={`https://dnid0r1bm9raq.cloudfront.net/${
+                  //   img?.image?.split(".com")[1]?.substring(1) || null
+                  // }`}
+                  src={img?.image}
                   alt=""
                   width={250}
                   height={250}
