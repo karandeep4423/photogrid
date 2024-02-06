@@ -53,15 +53,18 @@ export default function Home() {
         </div>
         <div>
           <h1 className="text-3xl sm:text-5xl text-gray-700 text-center font-bold">
-            Learn <span className="text-sky-600">Punjabi language </span>and get
-            <span className="text-pink-400"> Gurbani Classes of </span>
-            with experienced tutors of{" "}
-            <span className="text-cyan-500">Punjabi Lesson.</span>
+            Welcome to <span className="text-sky-600">PhotoGrid,</span>your
+            vibrant canvas for wishes!
+            <span className="text-pink-400"> Immerse yourself in a world </span>
+            where words transform into{" "}
+            <span className="text-cyan-500">captivating images.</span>
           </h1>
           <p data-aos="fade-up" className="text-lg sm:text-xl mt-8">
-            We are a team of qualified teachers with industry-proven years of
-            experience. Book a class according to your availability to open new
-            door of language.
+            From heartfelt good morning greetings to celebratory birthday
+            wishes, we&apos;ve curated an extensive collection that transcends
+            language barriers. Whether you&apos;re sending love, encouragement, or
+            congratulations, PhotoGrid lets you express it visually. Explore our
+            wish-filled gallery at Photo-Grid.org!
           </p>
         </div>
         {/* <div>
@@ -95,10 +98,9 @@ export default function Home() {
                 <Link href={img.imageName}>
                   <Image
                     className="m-auto rounded-xl object-fill aspect-square w-full h-auto "
-                    // src={`https://dnid0r1bm9raq.cloudfront.net/${
-                    //   img?.image?.split(".com")[1]?.substring(1) || null
-                    // }`}
-                    src={img?.image}
+                    src={`https://d3tkfpimtv8x2.cloudfront.net/${
+                      img?.image?.split(".com")[1]?.substring(1) || null
+                    }`}
                     height={600}
                     width={600}
                     alt=""

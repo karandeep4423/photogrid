@@ -15,15 +15,17 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
   const [collection, setCollection] = useState<resultProps[]>([]);
   const previousSlug = useRef<string | null>(null);
   const [imageCategories, setImageCategories] = useState<string[]>([]);
+  const [content,setContent] = useState<resultProps[]>([]);
   const pathname = usePathname();
   const router = useRouter();
   const pageSize = 12;
-  console.log("params", params);
+  console.log("params", content);
   type resultProps = {
     image: string;
     imageName: string;
     imageCategory: string;
     _id: string;
+    imageContent:string;
   };
 
   const handlePageChange = (page: number) => {
@@ -40,9 +42,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         method: "GET",
       });
       const result = await res.json();
-      // if (result.length == 0) {
-      //   router.push("/not-found-page");
-      // }
+      if (result.length == 0) {
+        router.push("/not-found-page");
+      }
       const fetchedData = result || [];
       console.log("fetch res", result);
       setData(fetchedData);
@@ -52,8 +54,21 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
     }
   };
 
+  const fetchContent = async()=>{
+    if (params) {
+      const res = await fetch(`/api/image-detail?params=${params}`, {
+        method: "GET",
+      });
+      const result = await res.json();
+      setContent(result);
+      previousSlug.current = params;
+    }
+
+  }
+
   useEffect(() => {
     fetchDataAndSetCollection();
+    fetchContent();
   }, [params]);
 
   const fetchCategories = async (data: resultProps[]) => {
@@ -117,15 +132,19 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               <h2 className="text-gray-700 relative mt-12 text-center mx-3 text-2xl sm:text-4xl font-bold">
                 {params
                   .replace(/-/g, " ")
-                  .replace(/^\w/, (match) => match.toUpperCase())}
+                  .replace(/^\w/, (match) => match.toUpperCase())}{" "}
                 images{" "}
               </h2>
             </div>
             <div className="bg-sky-400 z-20 mt-12 absolute mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
           </div>
-          <p className="px-10 my-2 text-lg">
-            Find good morning images which are useful to send your beloved ones.
-          </p>
+          <span >
+            {content?.map((img:resultProps,i:number)=>{
+              return(
+                <p className="px-10 my-2 text-lg">{img.imageContent}</p>
+              )
+            })}
+          </span>
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
             {collection.map((img: resultProps, i: number) => {
               return (
@@ -136,11 +155,10 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                 >
                   <div>
                     <Image
-                      // src={`https://dnid0r1bm9raq.cloudfront.net/${
-                      //   img?.image?.split(".com")[1]?.substring(1) || null
-                      // }`}
-                      src={img?.image}
-                      alt=""
+                      src={`https://d3tkfpimtv8x2.cloudfront.net/${
+                        img?.image?.split(".com")[1]?.substring(1) || null
+                      }`}
+                      alt={`${img.imageCategory}-image`}
                       width={250}
                       height={250}
                       className="rounded-2xl  object-fill aspect-square w-full h-auto"

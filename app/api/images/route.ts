@@ -10,12 +10,6 @@ export async function POST(req: NextRequest) {
     const imageName = formData.getAll("imageName");
     const imageCategory = formData.get("imageCategory");
     const imageLanguage = formData.get("imageLanguage");
-    const imageTitle = formData.get("imageTitle");
-    const imageDescription = formData.get("imageDescription");
-    const imageContent = formData.get("imageContent");
-    const imageCategoryTitle = formData.get("imageCategoryTitle");
-    const imageCategoryDescription = formData.get("imageCategoryDescription");
-    const imageCategoryContent = formData.get("imageCategoryContent");
     if (!images.length || !imageCategory || !imageLanguage) {
       return NextResponse.json(
         { error: "All fields are required." },
@@ -37,18 +31,12 @@ export async function POST(req: NextRequest) {
           .resize({ height: 1400, width: 1134, fit: "fill" })
           .jpeg({ quality: 80, mozjpeg: true })
           .toBuffer();
-        const s3Url = await uploadFileToS3(bufferResize, imageName.toString());
+        const s3Url = await uploadFileToS3(bufferResize, imageCategory.toString());
         return {
           image: s3Url,
           imageName: imageName.toString(),
           imageCategory: imageCategory.toString(),
           imageLanguage: imageLanguage.toString(),
-          imageTitle: imageTitle?.toString(),
-          imageDescription: imageDescription?.toString(),
-          imageContent: imageContent?.toString(),
-          imageCategoryTitle: imageCategoryTitle?.toString(),
-          imageCategoryDescription: imageCategoryDescription?.toString(),
-          imageCategoryContent: imageCategoryContent?.toString(),
         };
       })
     );

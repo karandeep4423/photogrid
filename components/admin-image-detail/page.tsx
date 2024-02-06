@@ -20,7 +20,7 @@ const customStyles = {
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.6)",
-    zIndex: 20
+    zIndex: 20,
   },
 };
 
@@ -66,9 +66,16 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
   });
 
   const fetchImageDetail = async () => {
-    const res = await fetch(`/api/image-detail?params=${url}`, {
-      method: "GET",
-    });
+    const res = await  fetch(
+      `/api/image-detail?params=${url
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/^-+|-+$/g, "")}`,
+      {
+        method: "GET",
+      }
+    );
     const result = await res.json();
     setImageDetail(result || []);
     const firstImageDetail = result[0];
@@ -81,10 +88,10 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
       setID(firstImageDetail._id);
     }
   };
-
+  console.log("img details", imageDetail);
   useEffect(() => {
     fetchImageDetail();
-  }, [url,imageName,imageLanguage]);
+  }, [url]);
 
   useEffect(() => {
     Modal.setAppElement("#root");
@@ -231,21 +238,21 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
               </label>
             </div>
             <div className="flex justify-around items-center">
-            <button
-              className="px-3 py-2 rounded-xl text-lg hover:bg-sky-700 bg-sky-600 text-gray-200"
-              onClick={(e) => {
-                updateImageDetail(e);
-              }}
-            >
-              Edit detail
-            </button>
-            <button
-              onClick={deleteImageDetail}
-              className="px-3 py-2 rounded-xl text-lg hover:bg-sky-700 bg-sky-600 text-gray-200"
-            >
-              Delete detail
-            </button>
-          </div>
+              <button
+                className="px-3 py-2 rounded-xl text-lg hover:bg-sky-700 bg-sky-600 text-gray-200"
+                onClick={(e) => {
+                  updateImageDetail(e);
+                }}
+              >
+                Edit detail
+              </button>
+              <button
+                onClick={deleteImageDetail}
+                className="px-3 py-2 rounded-xl text-lg hover:bg-sky-700 bg-sky-600 text-gray-200"
+              >
+                Delete detail
+              </button>
+            </div>
           </form>
         </div>
       </Modal>

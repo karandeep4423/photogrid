@@ -11,25 +11,35 @@ const Footer = () => {
               Photo Grid
             </h2>
             <p className="text-gray-300 font-medium">
-            We are a team of qualified teachers with industry-proven years of
-            experience. Book a class according to your availability to open new
-            door of language.
+              Discover a diverse array of wishful images at Photo Grid, where
+              every sentiment is beautifully captured.Explore the art of
+              heartfelt communication through images on Photo Grid.
             </p>
           </div>
           <div className="flex flex-col text-gray-300 font-medium space-y-4 pt-10">
-            <h2 className="text-xl font-medium text-white">Navigation</h2>
-            <Link href="/">Home</Link>
-            <Link href="/choose-your-lesson">Book Lesson</Link>
-            <Link href="/gurbani-in-english">Gurbani Lesson</Link>
-            <Link href="/about-us">About us</Link>
-            <Link href="/contact-us">Contact us</Link>
+            <h2 className="text-xl font-medium text-white">Italian Images</h2>
+            <Link href="/immagini-buongiorno">Immagini Buongiorno</Link>
+            <Link href="/buongiorno-amore-mio">Buongiorno amore mio</Link>
+            <Link href="/buongiorno-nuovissimi">Buongiorno nuovissimi</Link>
+            <Link href="/100-immagini-buongiorno-gratis-per-whatsapp">
+              Buongiorno gratis
+            </Link>
           </div>
           <div className="flex flex-col text-gray-300 font-medium space-y-4 pt-10">
-            <h2 className="text-xl font-medium text-white">Services</h2>
-            <Link href="/choose-your-lesson#book-lesson">Book a Lesson</Link>
-            <Link href="/choose-your-lesson#group-class">Group Class</Link>
-            <Link href="/choose-your-lesson#buy-hours">Buy Hours Pack</Link>
-            <Link href="/choose-your-lesson#subscription">Get Subscription</Link>
+            <h2 className="text-xl font-medium text-white">Polish Images</h2>
+            <Link href="/kartki-na-dobranoc">kartki na dobranoc</Link>
+            <Link href="/nowe-obrazki-na-dobranoc">
+              Nowe obrazki na dobranoc
+            </Link>
+            <Link href="/spokojnej-nocy-kartki-na-dobranoc">
+              Spokojnej nocy kartki na dobranoc
+            </Link>
+            <Link href="/superkartki-kartki-na-dobranoc">
+              Superkartki kartki na dobranoc
+            </Link>
+            <Link href="/urocze-obrazki-na-dobranoc">
+              Urocze obrazki na dobranoc{" "}
+            </Link>
           </div>
           <div className="flex flex-col text-gray-300 font-medium space-y-4 pt-10">
             <h2 className="text-xl text-white font-medium">Contact us</h2>

@@ -8,7 +8,7 @@ export async function generateMetadata({
   try {
     console.log("server func",  params?.slug);
     const res = await fetch(
-      `https://photogrid-9pfl.vercel.app/api/image-detail?params=${params?.slug}`,
+      `https://photo-grid.org/api/image-detail?params=${params?.slug}`,
       {
         method: "GET",
       }
@@ -53,7 +53,7 @@ export async function generateStaticParams({
   }
 
   try {
-    const res = await fetch(`https://photogrid-9pfl.vercel.app/api/images?params=${params.slug}`, {
+    const res = await fetch(`https://photo-grid.org/api/images?params=${params.slug}`, {
       method: 'GET',
     });
 

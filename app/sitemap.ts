@@ -1,7 +1,7 @@
 export default async function sitemap(){
     const baseUrl = "https://photo-grid.org";
   
-    const res = await fetch("https://photogrid-9pfl.vercel.app/api/images", {
+    const res = await fetch("http://localhost:3000/api/images", {
       method: "GET",
     });
   

@@ -14,56 +14,44 @@ export const NavItems = [
         href: "/immagini-buongiorno",
         subItems: [
           {
-            label: "Buonanotte amore",
-            href: "/buongiorno-amore",
+            label: "Buongiorno amore mio",
+            href: "/buongiorno-amore-mio",
           },
           {
-            label: "Buonanotte Invernale",
-            href: "/italian-images/immagini-buonanotte/buonanotte-invernale",
+            label: "Buongiorno nuovissimi",
+            href: "/buongiorno-nuovissimi",
           },
           {
-            label: "Buonanotte Invernale",
-            href: "/italian-images/immagini-buonanotte/buonanotte-invernale",
-          },
-        ],
-      },
-      {
-        label: "Immagini Bonjour",
-        href: "/italian-images/immagini-bonjour",
-        subItems: [
-          {
-            label: "New Element",
-            href: "/italian-images/immagini-bonjour/new-element",
+            label: "Buongiorno gratis",
+            href: "/100-immagini-buongiorno-gratis-per-whatsapp",
           },
         ],
       },
     ],
   },
   {
-    label: "French Images",
+    label: "Polish Images",
     href: "",
     subItems: [
       {
-        label: "Ikiguu",
-        href: "/italian-images/ihghjgjh",
+        label: "kartki na dobranoc",
+        href: "/kartki-na-dobranoc",
         subItems: [
           {
-            label: "Buonanot uigiu",
-            href: "/ijoihoih",
+            label: "Nowe obrazki na dobranoc",
+            href: "/nowe-obrazki-na-dobranoc",
           },
           {
-            label: "jhvjvjvjh",
-            href: "/ityfuyf hfuy hfuy",
+            label: "Spokojnej nocy kartki na dobranoc",
+            href: "/spokojnej-nocy-kartki-na-dobranoc",
           },
-        ],
-      },
-      {
-        label: "Immagini Bonjour",
-        href: "/italian-images/immagini-bonjour",
-        subItems: [
           {
-            label: "New Element",
-            href: "/italian-images/immagini-bonjour/new-element",
+            label: "Superkartki kartki na dobranoc",
+            href: "/superkartki-kartki-na-dobranoc",
+          },
+          {
+            label: "Urocze obrazki na dobranoc",
+            href: "/urocze-obrazki-na-dobranoc",
           },
         ],
       },

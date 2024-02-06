@@ -1,12 +1,13 @@
-import { Metadata } from 'next'
-import Contact from '@/components/contact-us/page'
+import { Metadata } from "next";
+import Contact from "@/components/contact-us/page";
 
 export const metadata: Metadata = {
-  title: 'Contact us ',
-  description:"ishd"
-}
+  title: "Connect With Us",
+  description:
+    "We value your thoughts and inquiries. Reach out to Photo Grid's dedicated team through our Contact Us page. ",
+};
 
-const  ContactPage = ()=>{
-  return <Contact/>
-}
-export default ContactPage
+const ContactPage = () => {
+  return <Contact />;
+};
+export default ContactPage;

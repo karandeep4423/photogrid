@@ -68,12 +68,30 @@ export default function Home() {
       formData.append("images", file);
       formData.append("imageNames", imageNames[index]);
     });
-    formData.append("imageName", imageName.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''));
-    formData.append("imageCategory", imageCategory.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''));
-    formData.append("imageLanguage", imageLanguage.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''));
-    // formData.append("imageTitle", imageTitle);
-    // formData.append("imageDescription", imageDescription);
-    // formData.append("imageContent", imageContent);
+    formData.append(
+      "imageName",
+      imageName
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/^-+|-+$/g, "")
+    );
+    formData.append(
+      "imageCategory",
+      imageCategory
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/^-+|-+$/g, "")
+    );
+    formData.append(
+      "imageLanguage",
+      imageLanguage
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/^-+|-+$/g, "")
+    );
     try {
       const res = await fetch("/api/images", {
         method: "POST",
@@ -117,15 +135,23 @@ export default function Home() {
   };
   const fetchData = async () => {
     setLoader(true);
-    const res = await fetch(`/api/images?params=${searchImage.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, '')}`, {
-      method: "GET",
-    });
+    const res = await fetch(
+      `/api/images?params=${searchImage
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/^-+|-+$/g, "")}`,
+      {
+        method: "GET",
+      }
+    );
     const result = await res.json();
     if (result.length == 0) {
       toast.error("There is no data for this request.");
     }
-    setData(result || []);
-    setCollection(result || [].slice(0, pageSize));
+    const fetchedData = result || [];
+    setData(fetchedData);
+    setCollection(fetchedData.slice(0, pageSize));
     setLoader(false);
   };
 
@@ -137,8 +163,16 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        imageName:imageName.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''),
-        imageLanguage:imageLanguage.trim().toLowerCase().replace(/\s+/g, '-').replace(/^-+|-+$/g, ''),
+        imageName: imageName
+          .trim()
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/^-+|-+$/g, ""),
+        imageLanguage: imageLanguage
+          .trim()
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/^-+|-+$/g, ""),
         imageTitle,
         imageDescription,
         imageContent,
@@ -162,6 +196,13 @@ export default function Home() {
     const to = pageSize * page;
     const from = to - pageSize;
     setCollection(data.slice(from, to));
+    scrollToTop();
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const imageDetailToggle = () => {
@@ -307,7 +348,9 @@ export default function Home() {
               required
             />
             <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-              {writeImageDetail == false ?"Write image name": "write category/url/image name for saving details"}
+              {writeImageDetail == false
+                ? "Write image name"
+                : "write category/url/image name for saving details"}
             </label>
           </div>
           {writeImageDetail == true ? (
@@ -405,10 +448,9 @@ export default function Home() {
             >
               <div>
                 <Image
-                  // src={`https://dnid0r1bm9raq.cloudfront.net/${
-                  //   img?.image?.split(".com")[1]?.substring(1) || null
-                  // }`}
-                  src={img?.image}
+                  src={`https://d3tkfpimtv8x2.cloudfront.net/${
+                    img?.image?.split(".com")[1]?.substring(1) || null
+                  }`}
                   alt=""
                   width={250}
                   height={250}
