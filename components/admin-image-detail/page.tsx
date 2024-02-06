@@ -66,7 +66,7 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
   });
 
   const fetchImageDetail = async () => {
-    const res = await  fetch(
+    const res = await fetch(
       `/api/image-detail?params=${url
         .trim()
         .toLowerCase()
@@ -88,7 +88,6 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
       setID(firstImageDetail._id);
     }
   };
-  console.log("img details", imageDetail);
   useEffect(() => {
     fetchImageDetail();
   }, [url]);

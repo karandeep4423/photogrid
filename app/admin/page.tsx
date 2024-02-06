@@ -212,17 +212,14 @@ export default function Home() {
   const verifyToken = (token: string, secret: Secret): JwtPayload | null => {
     try {
       const decoded = jwt.verify(token, secret) as JwtPayload;
-      console.log(decoded);
       return decoded;
     } catch (error) {
-      console.log(error);
       return null;
     }
   };
 
   useEffect(() => {
     const authToken = localStorage.getItem("token");
-    console.log("token", authToken);
     if (
       !authToken ||
       !verifyToken(authToken, process.env.NEXT_PUBLIC_JWT as Secret)

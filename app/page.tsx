@@ -33,8 +33,6 @@ export default function Home() {
     }
   };
 
-  console.log("image", image);
-
   useEffect(() => {
     AOS.init({
       offset: 100,

@@ -6,7 +6,6 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   try {
-    console.log("server func",  params?.slug);
     const res = await fetch(
       `https://photo-grid.org/api/image-detail?params=${params?.slug}`,
       {
@@ -14,8 +13,6 @@ export async function generateMetadata({
       }
     );
     const result = await res.json();
-    console.log("server func",  result);
-
 
     if (!result)
       return {
@@ -31,14 +28,12 @@ export async function generateMetadata({
       },
     };
   } catch (error) {
-    console.log(error)
     return {
       title: "Not Found",
       description: "The page you are looking for does not exist.",
     };
   }
 }
-
 
 export async function generateStaticParams({
   params,
@@ -53,9 +48,12 @@ export async function generateStaticParams({
   }
 
   try {
-    const res = await fetch(`https://photo-grid.org/api/images?params=${params.slug}`, {
-      method: 'GET',
-    });
+    const res = await fetch(
+      `https://photo-grid.org/api/images?params=${params.slug}`,
+      {
+        method: "GET",
+      }
+    );
 
     const result = await res.json();
 
@@ -69,7 +67,8 @@ export async function generateStaticParams({
       .filter((img) => {
         // Check if both imageName and imageCategory are unique
         const isUnique =
-          !uniqueValues.has(img?.imageName) && !uniqueValues.has(img?.imageCategory);
+          !uniqueValues.has(img?.imageName) &&
+          !uniqueValues.has(img?.imageCategory);
 
         if (isUnique) {
           // Add the values to the set if they are unique
@@ -84,12 +83,10 @@ export async function generateStaticParams({
         imageCategory: img?.imageCategory,
       }));
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     return [];
   }
 }
-
-
 
 const ImagePage = async ({ params }: { params: { slug: string } }) => {
   return <ImageCard params={params?.slug} />;

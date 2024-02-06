@@ -15,17 +15,16 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
   const [collection, setCollection] = useState<resultProps[]>([]);
   const previousSlug = useRef<string | null>(null);
   const [imageCategories, setImageCategories] = useState<string[]>([]);
-  const [content,setContent] = useState<resultProps[]>([]);
+  const [content, setContent] = useState<resultProps[]>([]);
   const pathname = usePathname();
   const router = useRouter();
   const pageSize = 12;
-  console.log("params", content);
   type resultProps = {
     image: string;
     imageName: string;
     imageCategory: string;
     _id: string;
-    imageContent:string;
+    imageContent: string;
   };
 
   const handlePageChange = (page: number) => {
@@ -46,7 +45,6 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         router.push("/not-found-page");
       }
       const fetchedData = result || [];
-      console.log("fetch res", result);
       setData(fetchedData);
       setCollection(fetchedData.slice(0, pageSize));
       fetchCategories(fetchedData);
@@ -54,7 +52,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
     }
   };
 
-  const fetchContent = async()=>{
+  const fetchContent = async () => {
     if (params) {
       const res = await fetch(`/api/image-detail?params=${params}`, {
         method: "GET",
@@ -63,8 +61,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
       setContent(result);
       previousSlug.current = params;
     }
-
-  }
+  };
 
   useEffect(() => {
     fetchDataAndSetCollection();
@@ -87,7 +84,6 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
     return Array.from(new Set(imageData.map((img) => img.imageCategory)));
   };
 
-  console.log("data", collection);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -138,11 +134,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
             </div>
             <div className="bg-sky-400 z-20 mt-12 absolute mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
           </div>
-          <span >
-            {content?.map((img:resultProps,i:number)=>{
-              return(
-                <p key={i} className="px-10 my-2 text-lg">{img.imageContent}</p>
-              )
+          <span>
+            {content?.map((img: resultProps, i: number) => {
+              return <p className="px-10 my-2 text-lg">{img.imageContent}</p>;
             })}
           </span>
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">

@@ -28,10 +28,11 @@ const sendMail = async (
 
   try {
     await transporter.sendMail(info);
-    console.log("Mail has been sent");
   } catch (err) {
-    console.error("Error sending mail", err);
-  }
+    return NextResponse.json({
+      success: false,
+      Error: "Internal Server Error",
+    });  }
 };
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
@@ -72,7 +73,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       message: "Mail sent successfully",
     });
   } catch (error) {
-    console.error("Error handling API request", error);
     return NextResponse.json({
       success: false,
       message: "Internal Server Error",

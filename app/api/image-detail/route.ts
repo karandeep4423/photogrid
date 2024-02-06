@@ -27,7 +27,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const savedImage = await newImage.save();
     return NextResponse.json({ message: "success", savedImage });
   } catch (err) {
-    console.log("errr image details", err);
     return NextResponse.json({ message: "Error saving image", err });
   }
 }
@@ -58,7 +57,7 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
         imageDescription,
         imageContent,
       },
-      { new: true } 
+      { new: true }
     );
 
     if (!updatedImageDetail) {
@@ -93,7 +92,6 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
 export const GET = async (req: NextRequest) => {
   const urlSearchParams = req.nextUrl.searchParams;
   const key = urlSearchParams.get("params");
-console.log("url debug",req)
   await connectToDb();
   try {
     let images;
@@ -117,4 +115,3 @@ console.log("url debug",req)
     return NextResponse.json({ error: "Internal Server Error" });
   }
 };
-

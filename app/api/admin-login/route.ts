@@ -17,7 +17,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         message: "Invalid request body",
       });
     }
-    console.log("login user", username, password);
 
     await connectToDb();
     const user = await Admin.findOne({ username, password });

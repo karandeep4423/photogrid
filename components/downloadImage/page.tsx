@@ -25,11 +25,8 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ img, imgName }) => {
       document.body.removeChild(link);
       setLoader(false);
       toast.success("Your image has been successfully downloaded");
-      console.log("resurl", res);
     } catch (error) {
-      console.error("Error downloading image:", error);
       toast.error("Interal server error");
-
     }
   };
 
