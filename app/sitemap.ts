@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 export default async function sitemap(){
     const baseUrl = "https://photo-grid.org";
   
