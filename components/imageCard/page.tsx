@@ -136,7 +136,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
           </div>
           <span>
             {content?.map((img: resultProps, i: number) => {
-              return <p className="px-10 my-2 text-lg">{img.imageContent}</p>;
+              return <p key={i} className="px-10 my-2 text-lg">{img.imageContent}</p>;
             })}
           </span>
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
