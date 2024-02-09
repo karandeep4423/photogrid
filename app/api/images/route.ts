@@ -4,12 +4,6 @@ import Images from "@/modals/images-schema";
 import { uploadFileToS3, deleteFileFromS3 } from "@/utility/s3Utils";
 import sharp from "sharp";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
-
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -52,7 +46,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: "success", images: savedImages });
   } catch (err) {
-    console.error("Error:", err);
     return NextResponse.json({ message: "Error saving images", error: err });
   }
 }

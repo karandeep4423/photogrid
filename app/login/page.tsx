@@ -24,7 +24,6 @@ const AdminLogin: React.FC = () => {
         localStorage.setItem("token",data?.token);
         router.push("/admin");
       } else {
-        console.error("Login failed:", data.message);
         toast.error("Invalid credentials")
       }
     } catch (error) {

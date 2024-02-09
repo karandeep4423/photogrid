@@ -83,7 +83,6 @@ export async function generateStaticParams({
         imageCategory: img?.imageCategory,
       }));
   } catch (error) {
-    console.error("Error fetching data:", error);
     return [];
   }
 }

@@ -4,6 +4,7 @@ import AOS from "aos";
 import Link from "next/link";
 import "aos/dist/aos.css";
 import Image from "next/image";
+import { toast } from "react-toastify";
 export default function Home() {
   const [image, setImage] = useState<resultProps[]>([]);
 
@@ -29,7 +30,7 @@ export default function Home() {
 
       setImage(uniqueImages);
     } catch (error) {
-      console.error("Error fetching images", error);
+      toast.error("Error fetching images");
     }
   };
 

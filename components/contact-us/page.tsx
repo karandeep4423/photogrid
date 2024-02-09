@@ -53,9 +53,9 @@ const Contact: React.FC = () => {
     <div>
       <div className="m-auto max-w-screen-xl">
         <div className="flex items-center justify-center">
-          <h2 className="text-gray-700 relative text-center mt-14 text-5xl font-bold">
+          <h1 className="text-gray-700 relative text-center mt-14 text-5xl font-bold">
             Send enquiry
-          </h2>
+          </h1>
           <div className="bg-sky-400 z-20 mt-12 absolute   mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
         </div>
         <form
