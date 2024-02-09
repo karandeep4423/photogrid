@@ -96,3 +96,13 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ error: "Internal Server Error" });
   }
 };
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '100mb',
+    },
+  },
+  // Specifies the maximum allowed duration for this function to execute (in seconds)
+  maxDuration: 5,
+}
