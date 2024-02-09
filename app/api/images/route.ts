@@ -3,6 +3,13 @@ import { connectToDb } from "@/middleware/mongodb";
 import Images from "@/modals/images-schema";
 import { uploadFileToS3, deleteFileFromS3 } from "@/utility/s3Utils";
 import sharp from "sharp";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -96,9 +103,3 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ error: "Internal Server Error" });
   }
 };
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
