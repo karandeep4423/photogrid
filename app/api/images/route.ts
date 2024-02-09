@@ -99,10 +99,6 @@ export const GET = async (req: NextRequest) => {
 
 export const config = {
   api: {
-    bodyParser: {
-      sizeLimit: '100mb',
-    },
+    bodyParser: false,
   },
-  // Specifies the maximum allowed duration for this function to execute (in seconds)
-  maxDuration: 5,
 }
