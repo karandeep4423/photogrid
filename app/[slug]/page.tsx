@@ -53,8 +53,7 @@ export async function generateStaticParams({
     const res = await fetch(
       `https://photo-grid.org/api/images?params=${params.slug}`,
       {
-        method: "GET",
-        cache: 'no-store' 
+        method: "GET"
       }
     );
 
