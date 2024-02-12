@@ -1,5 +1,6 @@
 import ImageCard from "@/components/imageCard/page";
-
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 export async function generateMetadata({
   params,
 }: {
@@ -7,11 +8,7 @@ export async function generateMetadata({
 }) {
   try {
     const res = await fetch(
-      `https://photo-grid.org/api/image-detail?params=${params?.slug}`,
-
-      {
-        cache: "no-store"
-      }
+      `https://photo-grid.org/api/image-detail?params=${params?.slug}`
     );
     const result = await res.json();
     if (!result)
@@ -49,10 +46,7 @@ export async function generateStaticParams({
 
   try {
     const res = await fetch(
-      `https://photo-grid.org/api/images?params=${params.slug}`,
-      {
-        cache: "no-store"
-      }
+      `https://photo-grid.org/api/images?params=${params.slug}`
     );
 
     const result = await res.json();

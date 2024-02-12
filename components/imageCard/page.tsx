@@ -86,7 +86,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
 
   const scrollToTop = () => {
     window.scrollTo({
-      top: 0,
+      top: 250,
       behavior: "smooth",
     });
   };
