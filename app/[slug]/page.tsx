@@ -8,12 +8,14 @@ export async function generateMetadata({
   try {
     const res = await fetch(
       `https://photo-grid.org/api/image-detail?params=${params?.slug}`,
+      
       {
         method: "GET",
+        cache: 'no-store' 
       }
     );
     const result = await res.json();
-
+    console.log("result",result)
     if (!result)
       return {
         title: "Not Found",
@@ -52,11 +54,11 @@ export async function generateStaticParams({
       `https://photo-grid.org/api/images?params=${params.slug}`,
       {
         method: "GET",
+        cache: 'no-store' 
       }
     );
 
     const result = await res.json();
-
     if (!Array.isArray(result)) {
       return [];
     }
@@ -82,6 +84,7 @@ export async function generateStaticParams({
         imageName: img?.imageName,
         imageCategory: img?.imageCategory,
       }));
+      
   } catch (error) {
     return [];
   }

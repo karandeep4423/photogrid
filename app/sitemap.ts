@@ -3,6 +3,7 @@ export default async function sitemap(){
   
     const res = await fetch("https://photo-grid.org/api/images", {
       method: "GET",
+      cache: 'no-store' 
     });
   
     const result = await res.json();
