@@ -10,7 +10,7 @@ export async function generateMetadata({
       `https://photo-grid.org/api/image-detail?params=${params?.slug}`,
 
       {
-        cache: "no-store",
+        cache: "no-store"
       }
     );
     const result = await res.json();
@@ -51,7 +51,7 @@ export async function generateStaticParams({
     const res = await fetch(
       `https://photo-grid.org/api/images?params=${params.slug}`,
       {
-        cache: "no-store",
+        cache: "no-store"
       }
     );
 
