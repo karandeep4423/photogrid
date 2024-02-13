@@ -55,6 +55,20 @@ export const NavItems = [
           },
         ],
       },
+      {
+        label: "Dzień Dobry",
+        href: "/dzień-dobry",
+        subItems: [
+          {
+            label: "Miłe powitanie na dzień dobry",
+            href: "/miłe-powitanie-na-dzień-dobry",
+          },
+          {
+            label: "Kartki na dzień dobry",
+            href: "/kartki-na-dzień-dobry",
+          },
+        ],
+      },
     ],
   },
   {

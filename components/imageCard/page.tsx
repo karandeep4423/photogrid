@@ -51,7 +51,6 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
       previousSlug.current = params;
     }
   };
-
   const fetchContent = async () => {
     if (params) {
       const res = await fetch(`/api/image-detail?params=${params}`, {
@@ -126,7 +125,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
           <div className="flex  items-center justify-center">
             <div>
               <h2 className="text-gray-700 relative mt-12 text-center mx-3 text-2xl sm:text-4xl font-bold">
-                {params
+                {decodeURIComponent(params)
                   .replace(/-/g, " ")
                   .replace(/^\w/, (match) => match.toUpperCase())}{" "}
                 images{" "}
