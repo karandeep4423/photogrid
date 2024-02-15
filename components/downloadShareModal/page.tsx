@@ -7,17 +7,14 @@ interface ModalProps {
   image: string;
   imageName: string;
 }
- const DownloadShareModal: React.FC<ModalProps> = ({
-  image,
-  imageName,
-}) => {
+const DownloadShareModal: React.FC<ModalProps> = ({ image, imageName }) => {
   const [open, setOpen] = useState(null);
   const handleShow = (image: any) => {
     setOpen((prevOpen) => (prevOpen === image ? null : image));
   };
   return (
     <div className="absolute top-2 right-2">
-      <button onClick={() => handleShow(image)}>
+      <button aria-label="Share-download menu" onClick={() => handleShow(image)}>
         <svg
           className="w-10 h-10 bg-blue-300 rounded-xl  text-gray-800 "
           aria-hidden="true"
@@ -42,7 +39,7 @@ interface ModalProps {
           <DownloadButton img={image} imgName={imageName} />
           <div id="root">
             <ShareButton
-              url={`https://dnid0r1bm9raq.cloudfront.net/${
+              url={`https://d3tkfpimtv8x2.cloudfront.net/${
                 image?.split(".com")[1]?.substring(1) || null
               }`}
               imgName={imageName}

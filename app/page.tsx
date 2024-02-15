@@ -100,9 +100,10 @@ export default function Home() {
                     src={`https://d3tkfpimtv8x2.cloudfront.net/${
                       img?.image?.split(".com")[1]?.substring(1) || null
                     }`}
-                    height={600}
-                    width={600}
-                    alt=""
+                    width={1134}
+                    height={1400}
+                    layout="responsive"
+                    alt="popular category images"
                   ></Image>
                 </Link>
                 <h3 className="text-center my-2 text-3xl font-medium">

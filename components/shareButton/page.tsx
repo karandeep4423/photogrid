@@ -68,6 +68,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ url, imgName }) => {
   return (
     <div>
       <button
+        aria-label="Share image"
         onClick={openModal}
         className="w-full flex items-center justify-center gap-1 bg-sky-600 px-2 py-2 text-white font-medium leading-tight border-2 rounded-xl "
       >
@@ -94,7 +95,11 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ url, imgName }) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <button className="absolute top-2 right-2 " onClick={closeModal}>
+        <button
+          aria-label="close share modal"
+          className="absolute top-2 right-2 "
+          onClick={closeModal}
+        >
           <svg
             className="w-8 h-8 text-gray-800 "
             aria-hidden="true"
@@ -149,7 +154,10 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ url, imgName }) => {
               type="text"
             ></input>
             <CopyToClipboard text={url} onCopy={handleCopy}>
-              <button className="bg-sky-600 rounded-lg text-white px-2 sm:px-3 py-2  focus:outline-none">
+              <button
+                aria-label="Copy image link"
+                className="bg-sky-600 rounded-lg text-white px-2 sm:px-3 py-2  focus:outline-none"
+              >
                 {isCopied ? "Copied!" : "Copy link"}
               </button>
             </CopyToClipboard>

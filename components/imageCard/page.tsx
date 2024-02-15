@@ -124,18 +124,21 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         <div>
           <div className="flex  items-center justify-center">
             <div>
-              <h2 className="text-gray-700 relative mt-12 text-center mx-3 text-2xl sm:text-4xl font-bold">
+              <h1 className="text-gray-700 relative mt-12 text-center mx-3 text-2xl sm:text-4xl font-bold">
                 {decodeURIComponent(params)
                   .replace(/-/g, " ")
                   .replace(/^\w/, (match) => match.toUpperCase())}{" "}
-                images{" "}
-              </h2>
+              </h1>
             </div>
             <div className="bg-sky-400 z-20 mt-12 absolute mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
           </div>
           <span>
             {content?.map((img: resultProps, i: number) => {
-              return <p key={i} className="px-10 my-2 text-lg">{img.imageContent}</p>;
+              return (
+                <p key={i} className="px-10 my-2 text-lg">
+                  {img.imageContent}
+                </p>
+              );
             })}
           </span>
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
@@ -152,8 +155,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                         img?.image?.split(".com")[1]?.substring(1) || null
                       }`}
                       alt={`${img.imageCategory}-image`}
-                      width={250}
-                      height={250}
+                      width={1134}
+                      height={1400}
+                      layout="responsive"
                       className="rounded-2xl  object-fill aspect-square w-full h-auto"
                     />
                   </div>

@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
       </Link>
       {/* menu and close div */}
       <div className="flex items-center lg:hidden">
-        <button onClick={() => handleShow()}>
+        <button aria-label="menu button" onClick={() => handleShow()}>
           {open ? (
             <svg
               className="w-10 h-10  text-gray-800 "
@@ -82,6 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
             {/* parents elements, conditional rendering for buttons and links  */}
             {item.subItems !== undefined ? (
               <button
+              aria-label="Image category"
                 className={`flex font-semibold text-gray-700 ${
                   visible === item.label
                     ? "transition duration-1000 ease-in-out justify-center px-2 border-2 rounded-xl bg-sky-600 text-white border-white p-1"

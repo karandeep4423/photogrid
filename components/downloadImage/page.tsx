@@ -33,6 +33,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ img, imgName }) => {
   return (
     <div>
       <button
+        aria-label="Download image"
         onClick={downloadImage}
         className="w-full flex items-center justify-center gap-1 bg-sky-600 px-2 py-2 text-white font-medium leading-tight border-2 rounded-xl "
       >
