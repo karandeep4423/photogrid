@@ -19,6 +19,7 @@ const Footer = () => {
           <div className="flex flex-col text-gray-300 font-medium space-y-4 pt-10">
             <h2 className="text-xl font-medium text-white">Italian Images</h2>
             <Link href="/immagini-buongiorno">Immagini Buongiorno</Link>
+            <Link href="/Immagini-buonanotte">Immagini Buonanotte</Link>
             <Link href="/buongiorno-amore-mio">Buongiorno amore mio</Link>
             <Link href="/buongiorno-nuovissimi">Buongiorno nuovissimi</Link>
             <Link href="/100-immagini-buongiorno-gratis-per-whatsapp">

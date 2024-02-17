@@ -27,6 +27,24 @@ export const NavItems = [
           },
         ],
       },
+      {
+        label: "Immagini Buonanotte",
+        href: "/immagini-buonanotte",
+        subItems: [
+          {
+            label: "Buonanotte divertente",
+            href: "/buonanotte-divertente",
+          },
+          {
+            label: "Buonanotte a domani",
+            href: "/buonanotte-a-domani",
+          },
+          {
+            label: "Buonanotte con affetto",
+            href: "/buonanotte-con-affetto",
+          },
+        ],
+      },
     ],
   },
   {
