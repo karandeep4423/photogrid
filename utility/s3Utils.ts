@@ -1,6 +1,9 @@
-// s3Utils.ts
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import ShortUniqueId from 'short-unique-id';
+import {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
+import ShortUniqueId from "short-unique-id";
 
 const s3Client = new S3Client({
   region: process.env.NEXT_PUBLIC_AWS_S3_REGION as string,
@@ -10,10 +13,13 @@ const s3Client = new S3Client({
   },
 });
 
-export async function uploadFileToS3(file: Buffer, fileName: string): Promise<string> {
+export async function uploadFileToS3(
+  file: Buffer,
+  fileName: string
+): Promise<string> {
   const uid = new ShortUniqueId({ length: 10 });
-  const shortId = uid.rnd(); 
-  
+  const shortId = uid.rnd();
+
   const params = {
     Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME!,
     Key: `${fileName}-${shortId}.jpg`,
@@ -32,7 +38,9 @@ export async function uploadFileToS3(file: Buffer, fileName: string): Promise<st
   }
 }
 
-export async function deleteFileFromS3(s3FolderNameAndfilename: string): Promise<void> {
+export async function deleteFileFromS3(
+  s3FolderNameAndfilename: string
+): Promise<void> {
   const params = {
     Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
     Key: `${s3FolderNameAndfilename}`,

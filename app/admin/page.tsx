@@ -133,6 +133,7 @@ export default function Home() {
       toast.error("Server error");
     }
   };
+
   const fetchData = async () => {
     setLoader(true);
     const res = await fetch(
@@ -185,6 +186,7 @@ export default function Home() {
       toast.error("Server error");
     }
   };
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [".jpeg", ".jpg", ".png"],
@@ -229,6 +231,25 @@ export default function Home() {
       }
     }
   }, [router]);
+  
+  const getSignedUrls = async (files: File[]): Promise<string[]> => {
+    const formData = new FormData();
+    files.forEach((file) => {
+      formData.append("images", file);
+    });
+  
+    const fetchUrl = await fetch("/api/get-url", {
+      method: "POST",
+      body: formData,
+    });
+  
+    if (!fetchUrl.ok) {
+      throw new Error("Failed to get pre-signed URLs");
+    }
+  
+    return await fetchUrl.json();
+  };
+  
 
   return (
     <div className="bg-black">
@@ -365,11 +386,10 @@ export default function Home() {
                 </label>
               </div>
               <div className="relative  z-0 w-full mb-4 group">
-                <input
+                <textarea
                   value={imageDescription}
                   onChange={(e) => setImageDescription(e.target.value)}
-                  type="text"
-                  className="font-bold text-2xl block background-transparent overflow-hidden py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+                  className=" h-24 font-medium text-xl block background-transparent overflow-hidden py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                   placeholder=" "
                 />
                 <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -377,11 +397,10 @@ export default function Home() {
                 </label>
               </div>
               <div className="relative  z-0 w-full mb-4 group">
-                <input
+                <textarea
                   value={imageContent}
                   onChange={(e) => setImageContent(e.target.value)}
-                  type="text"
-                  className="font-bold text-2xl block background-transparent overflow-hidden py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+                  className="h-24 font-medium text-xl block background-transparent overflow-hidden py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                   placeholder=" "
                 />
                 <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
