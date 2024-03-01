@@ -336,7 +336,7 @@ export default function Home() {
                   className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between  border-2  p-3  rounded-lg  mt-3"
                 >
                   <div>
-                    <Image
+                    <img
                       src={URL.createObjectURL(file)}
                       alt={`Preview ${file.name}`}
                       width={250}
@@ -463,7 +463,7 @@ export default function Home() {
               className=" border-2 rounded-xl h-fit  border-gray-400"
             >
               <div>
-                <Image
+                <img
                   src={`https://d3tkfpimtv8x2.cloudfront.net/${
                     img?.image?.split(".com")[1]?.substring(1) || null
                   }`}
@@ -471,7 +471,7 @@ export default function Home() {
                   width={250}
                   height={250}
                   className=" rounded-lg w-full h-44 "
-                ></Image>
+                ></img>
               </div>
               <div className="flex flex-col p-4 my-2">
                 <p className="text-xl font-bold text-sky-600">Image Name:</p>
