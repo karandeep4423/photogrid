@@ -150,14 +150,13 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               "
                 >
                   <div>
-                    <Image
+                    <img
                       src={`https://d3tkfpimtv8x2.cloudfront.net/${
                         img?.image?.split(".com")[1]?.substring(1) || null
                       }`}
                       alt={`${img.imageCategory}-image`}
                       width={1134}
                       height={1400}
-                      layout="responsive"
                       className="rounded-2xl  object-fill aspect-square w-full h-auto"
                     />
                   </div>
