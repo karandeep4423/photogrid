@@ -90,6 +90,30 @@ export const NavItems = [
     ],
   },
   {
+    label: "Deutsche bilder",
+    href: "",
+    subItems: [
+      {
+        label: "Guten morgen",
+        href: "/guten-morgen",
+        subItems: [
+          {
+            label: "Guten morgen bilder",
+            href: "/guten-morgen-bilder",
+          },
+          {
+            label: "Guten morgen grüße",
+            href: "/guten-morgen-grüße",
+          },
+          {
+            label: "Guten morgen montag",
+            href: "/guten-morgen-montag",
+          }
+        ],
+      }
+    ],
+  },
+  {
     label: "Contact Us",
     href: "/contact-us",
   },
