@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import Link from "next/link";
 import "aos/dist/aos.css";
-import Image from "next/image";
 import { toast } from "react-toastify";
 export default function Home() {
   const [image, setImage] = useState<resultProps[]>([]);
@@ -95,16 +94,15 @@ export default function Home() {
                  shadow-[5px_5px_0px_4px_rgba(2,139,199,0.5),_-5px_-5px_0px_rgba(255,255,255,1)]"
               >
                 <Link href={img.imageName}>
-                  <Image
+                  <img
                     className="m-auto rounded-xl object-fill aspect-square w-full h-auto "
                     src={`https://d3tkfpimtv8x2.cloudfront.net/${
                       img?.image?.split(".com")[1]?.substring(1) || null
                     }`}
                     width={1134}
                     height={1400}
-                    layout="responsive"
                     alt="popular category images"
-                  ></Image>
+                  ></img>
                 </Link>
                 <h3 className="text-center my-2 text-3xl font-medium">
                   <Link href={img.imageName}>

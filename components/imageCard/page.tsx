@@ -4,7 +4,6 @@ import Pagination from "@/components/Pagination/page";
 import Link from "next/link";
 import DownloadShareModal from "@/components/downloadShareModal/page";
 import { useRouter, usePathname } from "next/navigation";
-import Image from "next/image";
 
 interface ImageProps {
   params: string;
@@ -85,7 +84,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
 
   const scrollToTop = () => {
     window.scrollTo({
-      top: 250,
+      top: 150,
       behavior: "smooth",
     });
   };
@@ -124,23 +123,14 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         <div>
           <div className="flex  items-center justify-center">
             <div>
-              <h1 className="text-gray-700 relative mt-12 text-center mx-3 text-2xl sm:text-4xl font-bold">
+              <h1 className="text-gray-700 relative mt-8 text-center mx-3 text-2xl sm:text-4xl font-bold">
                 {decodeURIComponent(params)
                   .replace(/-/g, " ")
                   .replace(/^\w/, (match) => match.toUpperCase())}{" "}
               </h1>
             </div>
-            <div className="bg-sky-400 z-20 mt-12 absolute mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
+            <div className="bg-sky-400 z-10 mt-8 absolute mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
           </div>
-          <span>
-            {content?.map((img: resultProps, i: number) => {
-              return (
-                <p key={i} className="px-10 my-2 text-lg">
-                  {img.imageContent}
-                </p>
-              );
-            })}
-          </span>
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
             {collection.map((img: resultProps, i: number) => {
               return (
@@ -178,7 +168,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               onChange={handlePageChange}
             />
           </div>
-          <div className="mb-8 sm:mb-10 flex flex-wrap items-center justify-around m-2 sm:m-3">
+          <div className="mb-10 sm:mb-14 flex flex-wrap items-center justify-around m-2 sm:m-3">
             {imageCategories.map((category, index) => (
               <div key={index}>
                 <Link
@@ -195,6 +185,15 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                 </Link>
               </div>
             ))}
+          </div>
+          <div className="mb-8 sm:mb-10">
+            {content?.map((img: resultProps, i: number) => {
+              return (
+                <p key={i} className="whitespace-pre-line px-10 my-2 ">
+                  {img.imageContent}
+                </p>
+              );
+            })}
           </div>
         </div>
       )}
