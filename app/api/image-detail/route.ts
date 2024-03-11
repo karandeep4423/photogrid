@@ -15,6 +15,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       imageTitle,
       imageDescription,
       imageContent,
+      imageAlt
     } = await req.json();
     const newImage: any = new ImageDetail({
       imageName,
@@ -22,6 +23,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       imageTitle,
       imageDescription,
       imageContent,
+      imageAlt
     });
 
     const savedImage = await newImage.save();
@@ -45,6 +47,7 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
     imageTitle,
     imageDescription,
     imageContent,
+    imageAlt
   } = await req.json();
 
   try {
@@ -56,6 +59,7 @@ export const PUT = async (req: NextRequest, res: NextResponse) => {
         imageTitle,
         imageDescription,
         imageContent,
+        imageAlt
       },
       { new: true }
     );

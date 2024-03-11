@@ -24,6 +24,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
     imageCategory: string;
     _id: string;
     imageContent: string;
+    imageAlt: string;
   };
 
   const handlePageChange = (page: number) => {
@@ -89,6 +90,8 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
     });
   };
 
+  const altTags = content?.map((img: resultProps) => img?.imageAlt?.split(","));
+
   return (
     <div className="max-w-screen-xl m-auto">
       {collection?.length == 0 ? (
@@ -133,6 +136,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
           </div>
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
             {collection.map((img: resultProps, i: number) => {
+              const alIndex = (currentPage - 1) * pageSize + i;
               return (
                 <div
                   key={i}
@@ -144,7 +148,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                       src={`https://d3tkfpimtv8x2.cloudfront.net/${
                         img?.image?.split(".com")[1]?.substring(1) || null
                       }`}
-                      alt={`${img.imageCategory}-image`}
+                      alt={
+                        altTags[0] == undefined ? `${img.imageCategory}-image` : altTags[0][alIndex]==undefined?`${img.imageCategory}-image`:altTags[0][alIndex]
+                      }
                       width={1134}
                       height={1400}
                       className="rounded-2xl  object-fill aspect-square w-full h-auto"
