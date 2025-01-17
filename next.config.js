@@ -9,20 +9,6 @@ const nextConfig = {
         },
       ],
     },
-    async rewrites() {
-    return [
-      {
-        source: '/:path*', // Matches all paths
-        has: [
-          {
-            type: 'header',
-            key: 'x-cloudfront-s3-origin',
-          },
-        ],
-        destination: 'https://photo-grid.org/:path*', // Send directly to S3 via CloudFront
-      },
-    ];
-  },
   };
   
   module.exports = nextConfig;

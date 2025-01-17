@@ -41,9 +41,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         method: "GET",
       });
       const result = await res.json();
-      // if (result.length == 0) {
-      //   router.push("/not-found-page");
-      // }
+      if (result.length == 0) {
+        router.push("/not-found-page");
+      }
       const fetchedData = result || [];
       setData(fetchedData);
       setCollection(fetchedData.slice(0, pageSize));
