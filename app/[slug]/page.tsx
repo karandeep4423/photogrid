@@ -1,11 +1,17 @@
 import ImageCard from "@/components/imageCard/page";
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }) {
+  // Check if params or params.slug is undefined
+  if (!params || !params?.slug) {
+    return [];
+  }
+  
   try {
     const res = await fetch(
       `https://photo-grid.org/api/image-detail?params=${params?.slug}`

@@ -19,7 +19,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ img, imgName }) => {
       const blob = await respo.blob();
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = `${imgName + Math.floor(Date.now() / 1000)}.jpg`;
+      link.download = `${"photo-grid.org"}.jpg`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

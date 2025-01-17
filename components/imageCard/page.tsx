@@ -51,6 +51,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
       previousSlug.current = params;
     }
   };
+  
   const fetchContent = async () => {
     if (params) {
       const res = await fetch(`/api/image-detail?params=${params}`, {
@@ -95,6 +96,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
   return (
     <div className="max-w-screen-xl m-auto">
       {collection?.length == 0 ? (
+        // Loading Animation
         <div className=" h-screen flex items-center justify-center">
           <div
             role="status"
@@ -124,6 +126,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         </div>
       ) : (
         <div>
+          {/* Image Heading */}
           <div className="flex  items-center justify-center">
             <div>
               <h1 className="text-gray-700 relative mt-8 text-center mx-3 text-2xl sm:text-4xl font-bold">
@@ -134,6 +137,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
             </div>
             <div className="bg-sky-400 z-10 mt-8 absolute mix-blend-multiply filter blur-2xl h-16 w-56 "></div>
           </div>
+          {/* Image Grid */}
           <div className=" my-14  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
             {collection.map((img: resultProps, i: number) => {
               const alIndex = (currentPage - 1) * pageSize + i;
@@ -145,7 +149,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                 >
                   <div>
                     <img
-                      src={`https://d3tkfpimtv8x2.cloudfront.net/${
+                      src={`https://photo-grid.org/${
                         img?.image?.split(".com")[1]?.substring(1) || null
                       }`}
                       alt={
@@ -166,6 +170,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               );
             })}
           </div>
+          {/* Pagination */}
           <div className="my-10 flex justify-center">
             <Pagination
               current={currentPage}
@@ -174,6 +179,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               onChange={handlePageChange}
             />
           </div>
+          {/* Image Categories */}
           <div className="mb-10 sm:mb-14 flex flex-wrap items-center justify-around m-2 sm:m-3">
             {imageCategories.map((category, index) => (
               <div key={index}>
@@ -192,6 +198,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
               </div>
             ))}
           </div>
+          {/* Content of page */}
           <div className="mb-8 sm:mb-10">
             {content?.map((img: resultProps, i: number) => {
               return (

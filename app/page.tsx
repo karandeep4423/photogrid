@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import * as React from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import Link from "next/link";
 import "aos/dist/aos.css";
@@ -43,6 +44,7 @@ export default function Home() {
     });
     fetchImage();
   }, []);
+
   return (
     <div>
       <div className="relative max-w-screen-xl m-auto w-full h-fit sm:h-screen flex flex-col justify-center px-10 items-center  ">
@@ -60,21 +62,14 @@ export default function Home() {
           <p data-aos="fade-up" className="text-lg sm:text-xl mt-8">
             From heartfelt good morning greetings to celebratory birthday
             wishes, we&apos;ve curated an extensive collection that transcends
-            language barriers. Whether you&apos;re sending love, encouragement, or
-            congratulations, PhotoGrid lets you express it visually. Explore our
-            wish-filled gallery at Photo-Grid.org!
+            language barriers. Whether you&apos;re sending love, encouragement,
+            or congratulations, PhotoGrid lets you express it visually. Explore
+            our wish-filled gallery at Photo-Grid.org!
           </p>
         </div>
-        {/* <div>
-          <img
-            src="/italian.png"
-            className="w-[2000px] h-[500px]"
-            width={1000}
-            height={1000}
-            alt="learn punjabi language"
-          ></img>
-        </div> */}
       </div>
+      
+      {/* Popular image card */}
       <div className="  max-w-screen-xl m-auto">
         <div className="flex  items-center justify-center">
           <div data-aos="fade-up">
@@ -96,7 +91,7 @@ export default function Home() {
                 <Link href={img.imageName}>
                   <img
                     className="m-auto rounded-xl object-fill aspect-square w-full h-auto "
-                    src={`https://d3tkfpimtv8x2.cloudfront.net/${
+                    src={`https://photo-grid.org/${
                       img?.image?.split(".com")[1]?.substring(1) || null
                     }`}
                     width={1134}

@@ -236,6 +236,7 @@ export default function Home() {
   return (
     <div className="bg-black">
       <div className="mx-10 sm:mx-32  relative max-w-screen-xl xl:m-auto">
+        {/* Heading buttons */}
         <div className="flex justify-center gap-2 items-center flex-col">
           <h1 className="text-3xl mt-3 font-bold text-gray-400 sm:text-5xl text-center">
             Upload images
@@ -267,6 +268,7 @@ export default function Home() {
             </label>
           </div>
         </div>
+        {/* Search and upload images */}
         <div className="flex flex-col gap-5">
           <input
             placeholder="Search images by language and url"
@@ -300,6 +302,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+        {/* Upload images and content */}
         <form
           className="flex flex-col py-5 m-5 justify-center items-center"
           onSubmit={writeImageDetail == true ? imageDetailBtn : uploadImage}
@@ -311,6 +314,7 @@ export default function Home() {
             </p>
           </div>
           {files?.length > 0 && (
+            // Display selected files
             <div className="my-5">
               {files.map((file, index) => (
                 <div
@@ -338,6 +342,7 @@ export default function Home() {
               ))}
             </div>
           )}
+          {/* Images and image details uploader */}
           <div className="relative mt-5   z-0 w-full mb-4 group">
             <input
               value={imageName}
@@ -448,6 +453,7 @@ export default function Home() {
           </button>
         </form>
       </div>
+      {/* Images */}
       <div className="relative max-w-screen-xl m-auto grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-5">
         {collection?.map((img: resultProps, i: number) => {
           return (
@@ -457,7 +463,10 @@ export default function Home() {
             >
               <div>
                 <img
-                  src={img.image}
+                 src={`https://photo-grid.org/${
+                  img?.image?.split(".com")[1]?.substring(1) || null
+                }`}
+                  // src={img.image}
                   alt={img.imageName}
                   width={250}
                   height={250}
@@ -492,6 +501,7 @@ export default function Home() {
           );
         })}
       </div>
+      {/* Pagination */}
       <div className="my-10 flex justify-center">
         <Pagination
           current={currentPage}

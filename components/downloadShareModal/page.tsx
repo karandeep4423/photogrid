@@ -39,7 +39,7 @@ const DownloadShareModal: React.FC<ModalProps> = ({ image, imageName }) => {
           <DownloadButton img={image} imgName={imageName} />
           <div id="root">
             <ShareButton
-              url={`https://d3tkfpimtv8x2.cloudfront.net/${
+              url={`https://photo-grid.org/${
                 image?.split(".com")[1]?.substring(1) || null
               }`}
               imgName={imageName}
