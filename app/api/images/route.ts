@@ -32,7 +32,10 @@ export async function POST(req: NextRequest) {
           .resize({ height: 1400, width: 1134, fit: "fill" })
           .jpeg({ quality: 80, mozjpeg: true })
           .toBuffer();
-        const s3Url = await uploadFileToS3(bufferResize, imageCategory.toString());
+        const s3Url = await uploadFileToS3(
+          bufferResize,
+          imageCategory.toString()
+        );
         return {
           image: s3Url,
           imageName: imageName.toString(),
@@ -46,15 +49,15 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: "success", images: savedImages });
   } catch (err) {
-    console.log("image saving in db",err);
+    console.log("image saving in db", err);
     return NextResponse.json({ message: "Error saving images", error: err });
   }
 }
 
 // Extract filename from S3 URL
-export function extractFilenameFromS3Url(url: string): string {
+function extractFilenameFromS3Url(url: string): string {
   try {
-    return url.split('/').pop() || '';
+    return url.split("/").pop() || "";
   } catch (error) {
     console.error("Error extracting filename from URL:", error);
     throw new Error("Invalid S3 URL format");
@@ -64,15 +67,12 @@ export function extractFilenameFromS3Url(url: string): string {
 // API route handler
 export async function DELETE(req: NextRequest) {
   if (req.method !== "DELETE") {
-    return NextResponse.json(
-      { error: "Method Not Allowed" },
-      { status: 405 }
-    );
+    return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
   }
 
   try {
     const { _id, image } = await req.json();
-    
+
     if (!_id || !image) {
       return NextResponse.json(
         { error: "Missing required fields: _id or imageName" },
@@ -81,13 +81,13 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Extract the filename from the full S3 URL if needed
-    const filename = image.includes('https://') 
+    const filename = image.includes("https://")
       ? extractFilenameFromS3Url(image)
       : image;
 
     // Try to delete from S3 first
     const s3DeleteSuccess = await deleteFileFromS3(filename);
-    
+
     if (!s3DeleteSuccess) {
       return NextResponse.json(
         { error: "Failed to delete file from S3" },
@@ -108,9 +108,8 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({
       message: "Image deleted successfully",
-      status: 200
+      status: 200,
     });
-
   } catch (error) {
     console.error("Error in DELETE handler:", error);
     return NextResponse.json(
