@@ -1,20 +1,22 @@
-// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
     return [
-      // Handle image files by redirecting to CloudFront
-      {
-        source: '/:path*\\.(jpg|jpeg|png|gif|svg|webp|bmp)',
-        destination: 'https://d1zs065awsyu72.cloudfront.net/:path*'
-      },
-      // Handle all other paths normally
       {
         source: '/:path*',
-        destination: '/:path*'
-      }
+        destination: '/:path*', // Ensure all non-image requests are handled by Next.js
+      },
     ];
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'd1zs065awsyu72.cloudfront.net', // Allow images from CloudFront
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
+
