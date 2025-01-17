@@ -98,7 +98,6 @@ export const ImageDetailEdit: React.FC<ImageDetailProps> = ({ url }) => {
   useEffect(() => {
     Modal.setAppElement("#root");
   }, []);
-  console.log("alt only", imageAlt);
 
   const updateImageDetail = async (e: React.FormEvent) => {
     e.preventDefault();

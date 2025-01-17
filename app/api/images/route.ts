@@ -46,26 +46,77 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: "success", images: savedImages });
   } catch (err) {
+    console.log("image saving in db",err);
     return NextResponse.json({ message: "Error saving images", error: err });
   }
 }
-export async function DELETE(req: NextRequest, res: NextResponse) {
-  if (req.method === "DELETE") {
-    try {
-      const { _id, imageName } = await req.json();
-      if (!_id || !imageName) {
-        return NextResponse.json({ message: "Error: Empty request body" });
-      }
-      const s3FolderNameAndfilename = `${imageName}.jpg`;
-      await deleteFileFromS3(s3FolderNameAndfilename);
-      await connectToDb();
-      let img = await Images.findByIdAndDelete(_id);
-      return NextResponse.json({ message: "success", img });
-    } catch (err) {
-      return NextResponse.json({ message: "Error saving image", err });
+
+// Extract filename from S3 URL
+export function extractFilenameFromS3Url(url: string): string {
+  try {
+    return url.split('/').pop() || '';
+  } catch (error) {
+    console.error("Error extracting filename from URL:", error);
+    throw new Error("Invalid S3 URL format");
+  }
+}
+
+// API route handler
+export async function DELETE(req: NextRequest) {
+  if (req.method !== "DELETE") {
+    return NextResponse.json(
+      { error: "Method Not Allowed" },
+      { status: 405 }
+    );
+  }
+
+  try {
+    const { _id, image } = await req.json();
+    
+    if (!_id || !image) {
+      return NextResponse.json(
+        { error: "Missing required fields: _id or imageName" },
+        { status: 400 }
+      );
     }
-  } else {
-    NextResponse.json({ error: "Method Not Allowed" });
+
+    // Extract the filename from the full S3 URL if needed
+    const filename = image.includes('https://') 
+      ? extractFilenameFromS3Url(image)
+      : image;
+
+    // Try to delete from S3 first
+    const s3DeleteSuccess = await deleteFileFromS3(filename);
+    
+    if (!s3DeleteSuccess) {
+      return NextResponse.json(
+        { error: "Failed to delete file from S3" },
+        { status: 500 }
+      );
+    }
+
+    // If S3 deletion was successful, delete from database
+    await connectToDb();
+    const deletedImage = await Images.findByIdAndDelete(_id);
+
+    if (!deletedImage) {
+      return NextResponse.json(
+        { error: "Image not found in database" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      message: "Image deleted successfully",
+      status: 200
+    });
+
+  } catch (error) {
+    console.error("Error in DELETE handler:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
 

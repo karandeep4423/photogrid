@@ -114,7 +114,7 @@ export default function Home() {
     }
   };
 
-  const deleteImage = async (_id: string, imageName: string) => {
+  const deleteImage = async (_id: string, image: string) => {
     const res = await fetch("/api/images", {
       method: "DELETE",
       headers: {
@@ -122,15 +122,15 @@ export default function Home() {
       },
       body: JSON.stringify({
         _id,
-        imageName,
+        image,
       }),
     });
     const result = await res.json();
-    if (result.message === "success") {
+    if (result.status === 200) {
       toast.success("Image deleted successfully");
       fetchData();
     } else {
-      toast.error("Server error");
+      toast.error("Internal server error");
     }
   };
 
@@ -349,7 +349,7 @@ export default function Home() {
             />
             <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
               {writeImageDetail == false
-                ? "Write image name"
+                ? "Write image name(Parent category)"
                 : "write category/url/image name for saving details"}
             </label>
           </div>
@@ -412,7 +412,7 @@ export default function Home() {
                   required
                 />
                 <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                  Write image category/url
+                  Write image category/url(Child category)
                 </label>
               </div>
           )}
@@ -457,10 +457,8 @@ export default function Home() {
             >
               <div>
                 <img
-                  src={`https://d3tkfpimtv8x2.cloudfront.net/${
-                    img?.image?.split(".com")[1]?.substring(1) || null
-                  }`}
-                  alt=""
+                  src={img.image}
+                  alt={img.imageName}
                   width={250}
                   height={250}
                   className=" rounded-lg w-full h-44 "
@@ -484,7 +482,7 @@ export default function Home() {
                   {img.imageLanguage}
                 </span>
                 <button
-                  onClick={() => deleteImage(img._id, img.imageName)}
+                  onClick={() => deleteImage(img._id, img.image)}
                   className="mt-1 hover:bg-sky-700 px-3 p-2 rounded-xl font-medium text-gray-100 bg-sky-600"
                 >
                   Delete

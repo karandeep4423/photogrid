@@ -41,9 +41,9 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
         method: "GET",
       });
       const result = await res.json();
-      if (result.length == 0) {
-        router.push("/not-found-page");
-      }
+      // if (result.length == 0) {
+      //   router.push("/not-found-page");
+      // }
       const fetchedData = result || [];
       setData(fetchedData);
       setCollection(fetchedData.slice(0, pageSize));
@@ -149,7 +149,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                         img?.image?.split(".com")[1]?.substring(1) || null
                       }`}
                       alt={
-                        altTags[0] == undefined ? `${img.imageCategory}-image` : altTags[0][alIndex]==undefined?`${img.imageCategory}-image`:altTags[0][alIndex]
+                        altTags[0] == undefined ? `${img.imageCategory}-image` : altTags[0][ alIndex]==undefined?`${img.imageCategory}-image`:altTags[0][alIndex]
                       }
                       width={1134}
                       height={1400}

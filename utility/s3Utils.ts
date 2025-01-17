@@ -38,14 +38,19 @@ export async function uploadFileToS3(
   }
 }
 
-export async function deleteFileFromS3(
-  s3FolderNameAndfilename: string
-): Promise<void> {
-  const params = {
-    Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
-    Key: `${s3FolderNameAndfilename}`,
-  };
 
-  const command = new DeleteObjectCommand(params);
-  await s3Client.send(command);
+export async function deleteFileFromS3(s3FolderNameAndfilename: string): Promise<boolean> {
+  try {
+    const params = {
+      Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+      Key: s3FolderNameAndfilename,
+    };
+
+    const command = new DeleteObjectCommand(params);
+    await s3Client.send(command);
+    return true;
+  } catch (error) {
+    console.error("Error deleting file from S3:", error);
+    return false;
+  }
 }
