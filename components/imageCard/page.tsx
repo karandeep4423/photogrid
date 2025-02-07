@@ -51,7 +51,7 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
       previousSlug.current = params;
     }
   };
-  
+
   const fetchContent = async () => {
     if (params) {
       const res = await fetch(`/api/image-detail?params=${params}`, {
@@ -149,11 +149,18 @@ const ImageCard: React.FC<ImageProps> = ({ params }) => {
                 >
                   <div>
                     <img
-                      src={`https://photo-grid.org/${
-                        img?.image?.split(".com")[1]?.substring(1) || null
+                      src={`https://www.photo-grid.org/${
+                        img?.image?.replace(
+                          "https://s3.eu-central-1.amazonaws.com/photo-grid.org/",
+                          ""
+                        ) || ""
                       }`}
                       alt={
-                        altTags[0] == undefined ? `${img.imageCategory}-image` : altTags[0][ alIndex]==undefined?`${img.imageCategory}-image`:altTags[0][alIndex]
+                        altTags[0] == undefined
+                          ? `${img.imageCategory}-image`
+                          : altTags[0][alIndex] == undefined
+                          ? `${img.imageCategory}-image`
+                          : altTags[0][alIndex]
                       }
                       width={1134}
                       height={1400}

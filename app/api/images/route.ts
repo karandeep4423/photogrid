@@ -29,11 +29,12 @@ export async function POST(req: NextRequest) {
         }
         const buffer = Buffer.from(await image.arrayBuffer());
         const bufferResize = await sharp(buffer)
-          .resize({ height: 1400, width: 1134, fit: "fill" })
-          .jpeg({ quality: 80, mozjpeg: true })
+          .resize({ height: 1400, width: 1134, fit: "inside" })
+          .webp({ quality: 10 })
           .toBuffer();
         const s3Url = await uploadFileToS3(
           bufferResize,
+          imageName.toString(),
           imageCategory.toString()
         );
         return {
@@ -49,7 +50,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: "success", images: savedImages });
   } catch (err) {
-    console.log("image saving in db", err);
     return NextResponse.json({ message: "Error saving images", error: err });
   }
 }
@@ -57,9 +57,9 @@ export async function POST(req: NextRequest) {
 // Extract filename from S3 URL
 function extractFilenameFromS3Url(url: string): string {
   try {
-    return url.split("/").pop() || "";
+    const afterDomain = url.split("amazonaws.com/")[1] || "";
+    return afterDomain.split("/").slice(1).join("/") || "";
   } catch (error) {
-    console.error("Error extracting filename from URL:", error);
     throw new Error("Invalid S3 URL format");
   }
 }
@@ -81,9 +81,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Extract the filename from the full S3 URL if needed
-    const filename = image.includes("https://")
-      ? extractFilenameFromS3Url(image)
-      : image;
+    const filename = extractFilenameFromS3Url(image);
 
     // Try to delete from S3 first
     const s3DeleteSuccess = await deleteFileFromS3(filename);
@@ -111,7 +109,6 @@ export async function DELETE(req: NextRequest) {
       status: 200,
     });
   } catch (error) {
-    console.error("Error in DELETE handler:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

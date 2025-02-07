@@ -407,19 +407,19 @@ export default function Home() {
               </div>
             </>
           ) : (
-              <div className="relative  z-0 w-full mb-4 group">
-                <input
-                  value={imageCategory}
-                  onChange={(e) => setImageCategory(e.target.value)}
-                  type="text"
-                  className="font-bold text-2xl block background-transparent overflow-hidden py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
-                  placeholder=" "
-                  required
-                />
-                <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                  Write image category/url(Child category)
-                </label>
-              </div>
+            <div className="relative  z-0 w-full mb-4 group">
+              <input
+                value={imageCategory}
+                onChange={(e) => setImageCategory(e.target.value)}
+                type="text"
+                className="font-bold text-2xl block background-transparent overflow-hidden py-2.5 px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+                placeholder=" "
+                required
+              />
+              <label className=" peer-focus:font-medium absolute text-2xl text-gray-500 dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-sky-600 peer-focus:dark:text-sky-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Write image category/url(Child category)
+              </label>
+            </div>
           )}
 
           <div className="relative  z-0 w-full mb-4 group">
@@ -463,15 +463,17 @@ export default function Home() {
             >
               <div>
                 <img
-                 src={`https://photo-grid.org/${
-                  img?.image?.split(".com")[1]?.substring(1) || null
-                }`}
-                  // src={img.image}
+                  src={`https://www.photo-grid.org/${
+                    img?.image?.replace(
+                      "https://s3.eu-central-1.amazonaws.com/photo-grid.org/",
+                      ""
+                    ) || ""
+                  }`}
                   alt={img.imageName}
                   width={250}
                   height={250}
-                  className=" rounded-lg w-full h-44 "
-                ></img>
+                  className="rounded-lg w-full h-44"
+                />
               </div>
               <div className="flex flex-col p-4 my-2">
                 <p className="text-xl font-bold text-sky-600">Image Name:</p>

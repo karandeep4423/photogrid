@@ -8,13 +8,18 @@ type DownloadButtonProps = {
 };
 
 const DownloadButton: React.FC<DownloadButtonProps> = ({ img, imgName }) => {
+  console.log("img", img);
   const [loader, setLoader] = useState(false);
   const downloadImage = async () => {
     setLoader(true);
     try {
-      const key = img.split(".com")[1]?.substring(1) || null;
-      const response = await fetch(`/api/downloadImage?params=${key}`);
+      const afterDomain = img.split("amazonaws.com/")[1] || "";
+      const key = afterDomain.split("/").slice(1).join("/") || null;
+      const response = await fetch(
+        `/api/downloadImage?params=${key}`
+      );
       const res = await response.json();
+      console.log("respone", res);
       const respo = await fetch(res);
       const blob = await respo.blob();
       const link = document.createElement("a");

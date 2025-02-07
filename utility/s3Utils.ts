@@ -15,6 +15,7 @@ const s3Client = new S3Client({
 
 export async function uploadFileToS3(
   file: Buffer,
+  folderName: string,
   fileName: string
 ): Promise<string> {
   const uid = new ShortUniqueId({ length: 10 });
@@ -22,7 +23,7 @@ export async function uploadFileToS3(
 
   const params = {
     Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME!,
-    Key: `${fileName}-${shortId}.jpg`,
+    Key: `${folderName}/${fileName}/${fileName}-${shortId}.jpg`,
     Body: file,
     ContentType: "image/jpg",
   };
@@ -30,10 +31,9 @@ export async function uploadFileToS3(
   try {
     const command = new PutObjectCommand(params);
     await s3Client.send(command);
-    const s3Url = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.${process.env.NEXT_PUBLIC_AWS_S3_REGION}.amazonaws.com/${fileName}-${shortId}.jpg`;
+    const s3Url = `https://s3.${process.env.NEXT_PUBLIC_AWS_S3_REGION}.amazonaws.com/${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}/${folderName}/${fileName}/${fileName}-${shortId}.jpg`;
     return s3Url;
   } catch (error) {
-    console.error("Error uploading to S3:", error);
     throw new Error("Failed to upload to S3");
   }
 }
