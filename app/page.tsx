@@ -68,7 +68,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      
+
       {/* Popular image card */}
       <div className="  max-w-screen-xl m-auto">
         <div className="flex  items-center justify-center">
@@ -91,8 +91,11 @@ export default function Home() {
                 <Link href={img.imageName}>
                   <img
                     className="m-auto rounded-xl object-fill aspect-square w-full h-auto "
-                    src={`https://photo-grid.org/${
-                      img?.image?.split(".com")[1]?.substring(1) || null
+                    src={`https://www.photo-grid.org/${
+                      img?.image?.replace(
+                        "https://s3.eu-central-1.amazonaws.com/photo-grid.org/",
+                        ""
+                      ) || ""
                     }`}
                     width={1134}
                     height={1400}
