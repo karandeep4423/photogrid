@@ -51,7 +51,19 @@ const Footer = () => {
         <p className="text-center text-gray-300 py-6">
           Copyright ©{new Date().getFullYear()} All rights reserved
         </p>
-        <a target="_blank" className="text-center text-gray-300 m-3" href="https://numispark.com">Site developed by NumiSpark</a>
+        <p className="text-center py-3 text-gray-300">
+          Website developed by{" "}
+          <a
+            href="https://numispark.com"
+            title="NumiSpark – agence communication création web & mobile, marketing digital & seo et design"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-300 hover:text-white underline"
+            aria-label="Visit NumiSpark agence communication création web & mobile, marketing digital & seo et design"
+          >
+            NumiSpark
+          </a>
+        </p>{" "}
       </div>
     </div>
   );
