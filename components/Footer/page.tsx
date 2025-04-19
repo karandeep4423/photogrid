@@ -51,6 +51,7 @@ const Footer = () => {
         <p className="text-center text-gray-300 py-6">
           Copyright ©{new Date().getFullYear()} All rights reserved
         </p>
+        <a target="_blank" className="text-center text-gray-300 m-3" href="https://numispark.com">Site developed by NumiSpark</a>
       </div>
     </div>
   );
