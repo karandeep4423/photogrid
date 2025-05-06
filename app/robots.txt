@@ -1,5 +1,14 @@
-User-Agent: *
+User-agent: *
 Allow: /
-Disallow: /admin
 
+# Block your admin area
+Disallow: /admin/
+
+# Block all Punjabi-section pages
+Disallow: /punjabi
+Disallow: /punjabi-love-shayari-2-lines
+Disallow: /punjabi-love-shayari
+Disallow: /punjabi-shayari
+
+# Sitemap goes at the end (or the top—either is fine)
 Sitemap: https://photo-grid.org/sitemap.xml
