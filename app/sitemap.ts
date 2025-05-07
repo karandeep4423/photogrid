@@ -3,7 +3,7 @@ export const revalidate = 0;
 export default async function sitemap() {
   const baseUrl = "https://photo-grid.org";
 
-  const res = await fetch("https://photo-grid.org/api/images");
+  const res = await fetch("https://www.pixvill.com/api/images?params=polish");
 
   const result = await res.json();
 
